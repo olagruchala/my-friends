@@ -63,11 +63,18 @@ div.profile {
 
 div#status_create textarea {
   padding: 2%;
-  margin: 1%;
+  margin-top: 1%;
+    margin-bottom: 0;
   font-size: 15px;
   width: 56%;
   border: 1px solid var(--blue-color);
   border-radius: 3px;
+}
+
+div#status_create small {
+    display: block;
+    padding: 0;
+    margin-bottom: 2%;
 }
 
 div#status_create button {

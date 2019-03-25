@@ -5,7 +5,7 @@ import React from "react";
 
 
 
-class Status_added extends React.Component {
+class StatusAdded extends React.Component {
     render () {
         return (
             <div className="status_added">
@@ -41,4 +41,4 @@ class Status_added extends React.Component {
     }
 }
 
-export default Status_added;
+export default StatusAdded;

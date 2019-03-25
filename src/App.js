@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from "./Header";
-import Status_added from "./Status_added";
+import StatusAdded from "./StatusAdded";
+import StatusCreate from "./StatusCreate";
 
 class App extends Component {
   render() {
@@ -9,14 +10,10 @@ class App extends Component {
         <div>
           <Header />
           <div className="container">
-            <div id="status_create">
-              <p>What you want to share?</p>
-              <textarea rows="2" cols="70" placeholder="Write something..."></textarea>
-              <button id="send">Send</button>
-            </div>
+            <StatusCreate maxLetters = {200} />
             <br></br>
             <div id="status-container">
-              <Status_added />
+              <StatusAdded />
             </div>
           </div>
         </div>
