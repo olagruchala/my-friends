@@ -1,33 +1,183 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+:root {
+  --white-color: #FFFFFF;
+  --dark-blue-color: #112F41;
+  --blue-color: #0894A1;
+  --green-color: #47AB6C;
+  --yellow-color: #F2B134;
+  --red-color: #ED553B;
+}
+
+* {
+  font-family: 'Assistant', sans-serif;
+  color: var(--dark-blue-color);
+  margin: 0;
+  padding: 0;
+  outline-color: var(--blue-color);
+
+}
+
+/* navbar */
+header {
+  width: 100vw;
+  height: 170px;
+}
+
+div.logo {
+  height: 120px;
+  width: 300px;
+  /*margin: 0 auto;*/
+  margin-left: 6%;
+}
+
+div.logo h1 {
+  font-size: 35px;
+  text-align: center;
+  color: var(--dark-blue-color);
+  font-family: 'Indie Flower', cursive;
+}
+
+div.profile {
+  /*todo: needed to login*/
+}
+
+.container {
+  background-color: var(--blue-color);
+  border-radius: 3px;
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 2%;
+}
+
+#status_create,
+#status-container {
+  background-color: var(--white-color);
+  border-radius: 3px;
+  width: 80%;
+  margin: 0 auto;
+  padding: 2%;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+div#status_create textarea {
+  padding: 2%;
+  margin: 1%;
+  font-size: 15px;
+  width: 56%;
+  border: 1px solid var(--blue-color);
+  border-radius: 3px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+div#status_create button {
+  display: block;
+  margin: 0 auto;
+  padding: 1% 5%;
+  font-size: 15px;
+  color: var(--blue-color);
+  border: 1px solid var(--blue-color);
+  border-radius: 3px;
+  transition-duration: 0.3s;
 }
 
-.App-link {
-  color: #61dafb;
+#send:hover{
+  background-color: var(--blue-color);
+  color: var(--white-color);
+  outline-color: var(--blue-color);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+
+div.status_added {
+  border: 1px solid var(--blue-color);
+  border-radius: 3px;
+  padding: 1%;
+  margin: 1%;
 }
+
+div.author {
+  height: 80px;
+  position: relative;
+  text-align: left;
+  padding: 2% 7%;
+}
+
+div.author img {
+  border: 1px solid var(--blue-color);
+  border-radius: 3px;
+  height: 70px;
+  width: 70px;
+}
+
+.author_name,
+.status_data {
+  display: inline-block;
+  position: absolute;
+  height: 70px;
+  top: 50%;
+  margin-top: -35px;
+  margin-left: 5%;
+  color: var(--blue-color);
+}
+
+.status_data {
+  top: 80%;
+}
+
+.comment_panel {
+  margin: 0% 10%;
+  padding: 5% 5%;
+  text-align: center;
+}
+
+.comment_panel button {
+  width: 48%;
+  text-align: center;
+  float: left;
+  margin: 0 1%;
+  padding: 1% 5%;
+  font-size: 15px;
+  color: var(--blue-color);
+  border: 1px solid var(--blue-color);
+  border-radius: 3px;
+  transition-duration: 0.4s;
+}
+.comment_panel button * {
+  color: var(--blue-color);
+  padding: 1%;
+
+}
+
+.comment_panel button:hover {
+  background-color: var(--blue-color);
+  outline-color: var(--blue-color);
+}
+
+.comment_panel button:hover * {
+  color: var(--white-color);
+}
+
+textarea.comment_create {
+  display: none;
+  clear: both;
+  padding: 2%;
+  font-size: 15px;
+  border: 1px solid var(--blue-color);
+  border-radius: 3px;
+  width: 76%;
+  margin: 2% auto;
+  text-align: left;
+}
+
+div.comment_list {
+  border: 1px solid green;
+  width: 70%;
+  margin: 0% 10%;
+  padding: 5% 5%;
+  text-align: center;
+  display: none;
+}
+
+
