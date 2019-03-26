@@ -94,7 +94,9 @@ div#status_create button {
   outline-color: var(--blue-color);
 }
 
-
+.hidden {
+    display: none;
+}
 
 
 div.status_added {

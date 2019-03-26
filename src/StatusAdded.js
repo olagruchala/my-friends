@@ -1,7 +1,6 @@
 import margaretka from "./margaretka.jpg";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCommentDots, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
+import CommentPanel from "./CommentPanel";
 
 
 
@@ -22,20 +21,7 @@ class StatusAdded extends React.Component {
                     felis faucibus. Aenean sit amet velit vel purus volutpat tristique.
                 </div>
 
-                <div className="comment_panel">
-                    <button className="like_button">
-                        <FontAwesomeIcon icon={faThumbsUp} />
-                        <span>2</span>
-                    </button>
-                    <button className="comment_button">
-                        <FontAwesomeIcon icon={faCommentDots} />
-                        <span>4</span>
-                    </button>
-
-                    <textarea rows="1" cols="30" className="comment_create" placeholder="Write a comment..."></textarea>
-                    <div className="comment_list">comment_list</div>
-
-                </div>
+                <CommentPanel />
             </div>
         )
     }

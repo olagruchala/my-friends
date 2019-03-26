@@ -1,4 +1,5 @@
 import React from "react";
+import StatusAdded from "./StatusAdded";
 
 
 class StatusCreate extends React.Component {
@@ -8,6 +9,7 @@ class StatusCreate extends React.Component {
             letters: 0,
         };
 
+        this.sendStatus = this.sendStatus.bind(this);
         this.handleChange = this.handleChange.bind(this);
     }
 
@@ -16,6 +18,10 @@ class StatusCreate extends React.Component {
             letters: e.target.value.length
         });
     };
+
+    sendStatus () {
+        console.log(StatusAdded)
+    }
 
     render () {
         return (
@@ -29,7 +35,7 @@ class StatusCreate extends React.Component {
                 >
                 </textarea>
                 <small>{this.props.maxLetters - this.state.letters} characters</small>
-                <button id="send">Send</button>
+                <button id="send" onClick={this.sendStatus}>Send</button>
             </div>
         )
     }
