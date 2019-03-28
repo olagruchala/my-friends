@@ -5,6 +5,13 @@ import CommentPanel from "./CommentPanel";
 
 
 class StatusAdded extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state= {
+            data: {}
+        }
+    }
+
     render () {
         return (
             <div className="status_added">

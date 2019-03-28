@@ -52,13 +52,14 @@ div.profile {
 }
 
 #status_create,
-#status-container {
+#status_container {
   background-color: var(--white-color);
   border-radius: 3px;
-  width: 80%;
+  width: 80% !important;
   margin: 0 auto;
   padding: 2%;
   text-align: center;
+    /*todo: w ff po kliknięciu w  - #status_create textarea - dodaje się position: relative , ktory psuje kompozycje*/
 }
 
 div#status_create textarea {

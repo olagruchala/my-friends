@@ -5,6 +5,8 @@ import StatusAdded from "./StatusAdded";
 import StatusCreate from "./StatusCreate";
 
 class App extends Component {
+
+
   render() {
     return (
         <div>
@@ -12,7 +14,7 @@ class App extends Component {
           <div className="container">
             <StatusCreate maxLetters = {200} />
             <br></br>
-            <div id="status-container">
+            <div id="status_container">
               <StatusAdded />
             </div>
           </div>

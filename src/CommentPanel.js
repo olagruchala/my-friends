@@ -2,49 +2,60 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCommentDots, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import React from "react";
 
+const STORAGE_NAME = "comment_panel";
+
 class CommentPanel extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            like: 0,
-            comment: 0,
-            liked: false,
-            commented: false
+    constructor(props) {
+        super(props);
+        this.state = JSON.parse(localStorage.getItem(STORAGE_NAME)) || {
+            likesNumber: 0,
+            likesFlag: false,
+            commentsNumber: 0,
+            commentsFlag: false
         };
 
         this.likeHandler = this.likeHandler.bind(this);
         this.commentHandler = this.commentHandler.bind(this);
+
     }
 
-    likeHandler (event) {
-        let name = event.target.name;
+    // componentDidMount() {
+    //     sessionStorage.likesNumber = JSON.stringify(this.state);
+    // }
 
-        if (this.state.liked === false) {
+    likeHandler () {
+        console.log('this.state.likesNumber : ' + this.state.likesNumber);
+        console.log('this.state.likesFlag : ' + this.state.likesFlag);
+
+        let callback = () => localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state));
+
+        if (this.state.likesFlag) {
             this.setState(prevState => ({
-                liked: true,
-                [name]:  prevState[name] + 1
-            }))
+                likesFlag: false,
+                likesNumber:  prevState.likesNumber - 1
+                }), callback);
         } else {
             this.setState(prevState => ({
-                liked: false,
-                [name]:  prevState[name] - 1
-            }))
+                likesFlag: true,
+                likesNumber: prevState.likesNumber + 1
+            }), callback);
         }
     }
 
-    commentHandler (event) {
-        let name = event.target.name;
+    commentHandler () {
 
-        if (this.state.commented === false) {
+        let callback = () => localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state));
+
+        if (this.state.commentsFlag) {
             this.setState(prevState => ({
-                commented: true,
-                [name]:  prevState[name] + 1
-            }))
+                commentsFlag: false,
+                commentsNumber:  prevState.commentsNumber - 1
+            }), callback)
         } else {
             this.setState(prevState => ({
-                commented: false,
-                [name]:  prevState[name] - 1
-            }))
+                commentsFlag: true,
+                commentsNumber:  prevState.commentsNumber + 1
+            }), callback)
         }
     }
 
@@ -54,20 +65,20 @@ class CommentPanel extends React.Component {
 
                 <button className="like_button"
                         name="like"
-                        value={this.state.like}
+                        value={this.state.likesNumber}
                         onClick={this.likeHandler}
                 >
                     <FontAwesomeIcon icon={faThumbsUp} />
-                    <span>{this.state.like}</span>
+                    <span>{this.state.likesNumber}</span>
                 </button>
 
                 <button className="comment_button"
                         name="comment"
-                        value={this.state.comment}
+                        value={this.state.commentsNumber}
                         onClick={this.commentHandler}
                 >
                     <FontAwesomeIcon icon={faCommentDots} />
-                    <span>{this.state.comment}</span>
+                    <span>{this.state.commentsNumber}</span>
                 </button>
 
                 <textarea rows="1" cols="30"
@@ -81,5 +92,7 @@ class CommentPanel extends React.Component {
         )
     }
 }
+
+
 
 export default CommentPanel;

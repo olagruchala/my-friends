@@ -1,5 +1,4 @@
 import React from "react";
-import StatusAdded from "./StatusAdded";
 
 
 class StatusCreate extends React.Component {
@@ -7,6 +6,7 @@ class StatusCreate extends React.Component {
         super ();
         this.state = {
             letters: 0,
+            data: {}
         };
 
         this.sendStatus = this.sendStatus.bind(this);
@@ -19,8 +19,9 @@ class StatusCreate extends React.Component {
         });
     };
 
-    sendStatus () {
-        console.log(StatusAdded)
+    sendStatus (profile, data, contnet) {
+        console.log("STATUS WYSYŁAM");
+
     }
 
     render () {
