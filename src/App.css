@@ -170,7 +170,6 @@ div.author img {
 }
 
 textarea.comment_create {
-  display: none;
   clear: both;
   padding: 2%;
   font-size: 15px;
@@ -182,12 +181,11 @@ textarea.comment_create {
 }
 
 div.comment_list {
-  border: 1px solid green;
+  border: 1px solid red;
   width: 70%;
   margin: 0% 10%;
   padding: 5% 5%;
   text-align: center;
-  display: none;
 }
 
 

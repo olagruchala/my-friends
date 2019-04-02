@@ -3,32 +3,33 @@ import React from "react";
 import CommentPanel from "./CommentPanel";
 
 
-
+// todo
 class StatusAdded extends React.Component {
     constructor(props) {
         super(props);
-        this.state= {
-            data: {}
+        this.state = {
+            // like: {},
+            // comment: {}
         }
     }
 
-    render () {
+    render() {
+
+        const {txtValue, date, name} = this.props;
+
         return (
             <div className="status_added">
 
                 <div className="author">
                     <img className="author_img" src={margaretka} alt="user"></img>
-                    <p className="author_name">Ola Gruchała</p>
-                    <small className="status_data">Today</small>
+                    <p className="author_name">{name}</p>
+                    <small className="status_data">{date}</small>
                 </div>
+                {/*todo: długie textValue nie zawija się i nie mieści w divie*/}
+                <div className="status_content">{txtValue}</div>
 
-                <div className="status_content">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Praesent vulputate nisl sit amet mi aliquet, eget mattis est accumsan. Aenean placerat
-                    elementum erat nec consequat. Vivamus tristique turpis consequat erat rhoncus, nec tincidunt
-                    felis faucibus. Aenean sit amet velit vel purus volutpat tristique.
-                </div>
-
-                <CommentPanel />
+                {/*todo: przekazać this.state z CommentPanel jako propsy*/}
+                <CommentPanel/>
             </div>
         )
     }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from "./Header";
-import StatusAdded from "./StatusAdded";
 import StatusCreate from "./StatusCreate";
 
 class App extends Component {
@@ -13,10 +12,6 @@ class App extends Component {
           <Header />
           <div className="container">
             <StatusCreate maxLetters = {200} />
-            <br></br>
-            <div id="status_container">
-              <StatusAdded />
-            </div>
           </div>
         </div>
     );

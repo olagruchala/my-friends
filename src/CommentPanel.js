@@ -11,12 +11,12 @@ class CommentPanel extends React.Component {
             likesNumber: 0,
             likesFlag: false,
             commentsNumber: 0,
-            commentsFlag: false
+            commentsFlag: false,
+            // displayComments: false
         };
 
         this.likeHandler = this.likeHandler.bind(this);
         this.commentHandler = this.commentHandler.bind(this);
-
     }
 
     // componentDidMount() {
@@ -49,17 +49,36 @@ class CommentPanel extends React.Component {
         if (this.state.commentsFlag) {
             this.setState(prevState => ({
                 commentsFlag: false,
-                commentsNumber:  prevState.commentsNumber - 1
+                commentsNumber:  prevState.commentsNumber - 1,
+                // displayComments: !prevState.displayComments
+
             }), callback)
         } else {
             this.setState(prevState => ({
                 commentsFlag: true,
-                commentsNumber:  prevState.commentsNumber + 1
+                commentsNumber:  prevState.commentsNumber + 1,
+                // displayComments: !prevState.displayComments
             }), callback)
         }
     }
 
     render (){
+
+        // let comm = null;
+        // if (this.state.displayComments) {
+        //     comm = (
+        //         <div>
+        //             <textarea rows="1" cols="30"
+        //                   className="comment_create"
+        //                   placeholder="Write a comment..."
+        //             >
+        //             </textarea>
+        //             <div className="comment_list">comment list</div>
+        //         </div>
+        //     )
+        //
+        // }
+
         return (
             <div className="comment_panel">
 
@@ -81,18 +100,11 @@ class CommentPanel extends React.Component {
                     <span>{this.state.commentsNumber}</span>
                 </button>
 
-                <textarea rows="1" cols="30"
-                          className="comment_create"
-                          placeholder="Write a comment..."
-                >
-                </textarea>
-                <div className="comment_list">comment_list</div>
+                {/*{comm}*/}
 
             </div>
         )
     }
 }
-
-
 
 export default CommentPanel;
