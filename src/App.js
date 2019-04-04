@@ -7,26 +7,31 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: ""
+            userName: sessionStorage.getItem("username") || ""
         };
     }
 
     componentDidMount() {
 
         let userName = "";
+        const callbackForUserName = () => {
+            alert("Hello " + this.state.userName + "!");
+            sessionStorage.setItem("username", userName)
+        };
 
-        setTimeout ( () => {
+        setTimeout (() => {
             if (this.state.userName === "") {
                 userName = prompt('Podaj swoje imię:');
 
-                if (userName != null) {
+                if (userName !== "" && userName !== null) {
                     this.setState({
                         userName: userName
-                    }, () => alert("Hello " + this.state.userName + "!"));
+                    }, callbackForUserName);
                 } else {
+                    console.log(userName);
                     this.setState({
                         userName: "unknown"
-                    }, () => alert("Hello unknown!"))
+                    }, () => alert("Hello " + this.state.userName + "!"))
                 }
             }
         }, 0)
