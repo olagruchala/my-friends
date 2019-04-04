@@ -6,9 +6,8 @@ const STORAGE_NAME = "statuses";
 class StatusCreate extends React.Component {
     constructor(props) {
         super(props);
-        // JSON.parse(localStorage.getItem(STORAGE_NAME)) ||
-        this.state =  {
-            statusArr: [],
+        this.state = {
+            statusArr: JSON.parse(localStorage.getItem(STORAGE_NAME)) || [],
             letters: 0,
             textareaValue: ""
         };
@@ -24,37 +23,36 @@ class StatusCreate extends React.Component {
         });
     };
 
-    // todo: pobierz "name" profilu za pomocą pop-up
+    // todo: pobierz "name" profilu za pomocą okna dialogowego i zapisz w sessionStorageD
 
-    sendStatus () {
+    sendStatus = () => {
         const dateInJSON = ((new Date()).toJSON()).substring(0, 16).replace("T", " ");
 
-        let callback = () => {localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state));
-            console.log(this.state.statusArr)};
+        let callback = () => {
+            localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state.statusArr))};
 
-        // let arr = this.state.statusArr;
-        // arr.push(<StatusAdded key={arr.length + 1} txtValue={this.state.textareaValue} date={dateInJSON} />);
+        let statusData = {
+            id: this.state.statusArr.length + 1,
+            txtValue: this.state.textareaValue,
+            date: dateInJSON,
+            name: this.props.name
+        };
 
         this.setState( prevState => ({
-            statusArr: [ <StatusAdded key={this.state.statusArr.length + 1} txtValue={this.state.textareaValue} date={dateInJSON} />, ...prevState.statusArr ],
+            statusArr: [ statusData, ...prevState.statusArr ],
             letters: 0,
             textareaValue: ""
         }), callback);
-
     };
 
     render() {
 
-        // let fromLocal = JSON.parse(localStorage.getItem(STORAGE_NAME));
-        // console.log(fromLocal);
-
-
-        const maxLetters = this.props;
+        const {maxLetters} = this.props;
 
         return (
             <div>
                 <div id="status_create">
-                    <p>What you want to share?</p>
+                    <p>What do you want to share?</p>
                     <textarea rows="2" cols="70"
                               placeholder="Write something..."
                               onChange={this.textareaHandle}
@@ -68,7 +66,12 @@ class StatusCreate extends React.Component {
                 </div>
                 <br/>
                 <div id="status_container">
-                    {this.state.statusArr}
+                    {
+                        this.state.statusArr.map(statusData => {
+                            // console.log(this.state.statusArr)
+                            return <StatusAdded key={statusData.id} txtValue={statusData.txtValue} date={statusData.date} name={statusData.name}/>
+                        })
+                    }
                 </div>
             </div>
         )

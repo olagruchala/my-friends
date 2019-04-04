@@ -29,6 +29,7 @@ div.logo {
   width: 300px;
   /*margin: 0 auto;*/
   margin-left: 6%;
+  float: left;
 }
 
 div.logo h1 {
@@ -38,8 +39,16 @@ div.logo h1 {
   font-family: 'Indie Flower', cursive;
 }
 
-div.profile {
-  /*todo: needed to login*/
+div.hello_user {
+  margin-right: 10%;
+  padding-top: 11%;
+  text-align: right;
+}
+
+div.hello_user span {
+  font-family: 'Indie Flower', cursive;
+  font-size: large;
+  font-weight: bold;
 }
 
 .container {

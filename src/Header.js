@@ -11,7 +11,9 @@ class Header extends React.Component {
                     <img src={logo} alt="logo" height="120px"></img>
                     <h1>friends</h1>
                 </div>
-                {/* todo: create next div with login button (float left) */}
+                <div className="hello_user">
+                    <span>Hello {this.props.name}!</span>
+                </div>
             </header>
         )
     }
