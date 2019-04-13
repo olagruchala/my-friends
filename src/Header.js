@@ -2,7 +2,7 @@ import logo from "./logo.png";
 import React from "react";
 import './App.css';
 
-//todo
+
 class Header extends React.Component {
     render () {
         return (

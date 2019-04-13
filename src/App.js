@@ -21,7 +21,7 @@ class App extends Component {
 
         setTimeout (() => {
             if (this.state.userName === "") {
-                userName = prompt('Podaj swoje imię:');
+                userName = prompt('What\'s your name?');
 
                 if (userName !== "" && userName !== null) {
                     this.setState({
