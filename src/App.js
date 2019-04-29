@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './App.css';
 import Header from "./Header";
 import StatusCreate from "./StatusCreate";
+import 'bootstrap';
 
 class App extends Component {
     constructor(props) {
@@ -41,10 +42,13 @@ class App extends Component {
 
         return (
             <div>
-                <Header name={this.state.userName}/>
-                <div className="container">
-                    <StatusCreate maxLetters={200} name={this.state.userName}/>
+                <div>
+                    <Header name={this.state.userName}/>
+                    <div className="container">
+                        <StatusCreate maxLetters={200} name={this.state.userName}/>
+                    </div>
                 </div>
+
             </div>
         );
     }
