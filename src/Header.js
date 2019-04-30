@@ -10,14 +10,15 @@ class Header extends React.Component {
         return (
             <header>
                 <div className="logo">
-                    <img src={logo} alt="logo" height="120px"></img>
+                    <img src={logo} alt="logo" height="120px">
+                    </img>
                     <h1>friends</h1>
                 </div>
                 <div className="hello_user">
-                    {(this.props.name !== "")
-                        ? <span>Hello {this.props.name}!</span>
-                        : <ModalUserName />
-                    }
+                    <span>Hello {this.props.userName}!</span> // TODO: this.props.userName nie działa
+                    <br/>
+                    <ModalUserName />
+
                 </div>
             </header>
         )

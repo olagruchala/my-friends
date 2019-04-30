@@ -3,7 +3,7 @@
 :root {
   --white-color: #FFFFFF;
   --dark-blue-color: #112F41;
-  --blue-color: #0894A1;
+  --blue-color: #24A2B6;
   --green-color: #47AB6C;
   --yellow-color: #F2B134;
   --red-color: #ED553B;
@@ -36,8 +36,8 @@ div.logo h1 {
 }
 
 div.hello_user {
-  margin-right: 10%;
-  padding-top: 11%;
+  margin-right: 11%;
+  padding-top: 7%;
   text-align: right;
   color: var(--dark-blue-color);
 }
