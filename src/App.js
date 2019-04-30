@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import './App.css';
 import Header from "./Header";
 import StatusCreate from "./StatusCreate";
-import 'bootstrap';
 
 class App extends Component {
     constructor(props) {
@@ -12,31 +11,31 @@ class App extends Component {
         };
     }
 
-    componentDidMount() {
-
-        let userName = "";
-        const callbackForUserName = () => {
-            alert("Hello " + this.state.userName + "!");
-            sessionStorage.setItem("username", userName)
-        };
-
-        setTimeout (() => {
-            if (this.state.userName === "") {
-                userName = prompt('What\'s your name?');
-
-                if (userName !== "" && userName !== null) {
-                    this.setState({
-                        userName: userName
-                    }, callbackForUserName);
-                } else {
-                    console.log(userName);
-                    this.setState({
-                        userName: "unknown"
-                    }, () => alert("Hello " + this.state.userName + "!"))
-                }
-            }
-        }, 0)
-    }
+    // componentDidMount() {
+    //
+    //     let userName = "";
+    //     const callbackForUserName = () => {
+    //         alert("Hello " + this.state.userName + "!");
+    //         sessionStorage.setItem("username", userName)
+    //     };
+    //
+    //     setTimeout (() => {
+    //         if (this.state.userName === "") {
+    //             userName = prompt('What\'s your name?');
+    //
+    //             if (userName !== "" && userName !== null) {
+    //                 this.setState({
+    //                     userName: userName
+    //                 }, callbackForUserName);
+    //             } else {
+    //                 console.log(userName);
+    //                 this.setState({
+    //                     userName: "unknown"
+    //                 }, () => alert("Hello " + this.state.userName + "!"))
+    //             }
+    //         }
+    //     }, 0)
+    // }
 
     render() {
 
