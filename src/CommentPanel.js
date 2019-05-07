@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCommentDots, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import {faCommentDots, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import React from "react";
 
 const STORAGE_NAME_PREFIX = "comment_panel-";

@@ -23,10 +23,8 @@ class StatusCreate extends React.Component {
         });
     };
 
-    // todo: pobierz "name" profilu za pomocą okna dialogowego i zapisz w sessionStorageD
-
     sendStatus = () => {
-        const dateInJSON = ((new Date()).toJSON()).substring(0, 16).replace("T", " ");
+        const localeDate = new Date().toLocaleString().substring(0, 17);
 
         let callback = () => {
             localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state.statusArr))};
@@ -34,7 +32,7 @@ class StatusCreate extends React.Component {
         let statusData = {
             id: this.state.statusArr.length + 1,
             txtValue: this.state.textareaValue,
-            date: dateInJSON,
+            date: localeDate,
             name: this.props.name
         };
 
@@ -68,8 +66,11 @@ class StatusCreate extends React.Component {
                 <div id="status_container">
                     {
                         this.state.statusArr.map(statusData => {
-                            // console.log(this.state.statusArr)
-                            return <StatusAdded key={statusData.id} txtValue={statusData.txtValue} date={statusData.date} name={statusData.name}/>
+                            return <StatusAdded key={statusData.id}
+                                                txtValue={statusData.txtValue}
+                                                date={statusData.date}
+                                                name={statusData.name}
+                            />
                         })
                     }
                 </div>

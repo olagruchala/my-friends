@@ -3,7 +3,7 @@
 :root {
   --white-color: #FFFFFF;
   --dark-blue-color: #112F41;
-  --blue-color: #0894A1;
+  --blue-color: #24A2B6;
   --green-color: #47AB6C;
   --yellow-color: #F2B134;
   --red-color: #ED553B;
@@ -11,14 +11,11 @@
 
 * {
   font-family: 'Assistant', sans-serif;
-  color: var(--dark-blue-color);
   margin: 0;
   padding: 0;
   outline-color: var(--blue-color);
-
 }
 
-/* navbar */
 header {
   width: 100vw;
   height: 170px;
@@ -27,7 +24,6 @@ header {
 div.logo {
   height: 120px;
   width: 300px;
-  /*margin: 0 auto;*/
   margin-left: 6%;
   float: left;
 }
@@ -40,15 +36,18 @@ div.logo h1 {
 }
 
 div.hello_user {
-  margin-right: 10%;
-  padding-top: 11%;
+  margin-right: 11%;
+  padding-top: 7%;
   text-align: right;
+  color: var(--dark-blue-color);
 }
 
 div.hello_user span {
   font-family: 'Indie Flower', cursive;
   font-size: large;
   font-weight: bold;
+  color: var(--dark-blue-color);
+
 }
 
 .container {
@@ -62,6 +61,7 @@ div.hello_user span {
 
 #status_create,
 #status_container {
+  color: var(--dark-blue-color);
   background-color: var(--white-color);
   border-radius: 3px;
   width: 80% !important;
@@ -82,9 +82,11 @@ div#status_create textarea {
 }
 
 div#status_create small {
-    display: block;
-    padding: 0;
-    margin-bottom: 2%;
+  display: block;
+  color: var(--dark-blue-color);
+  padding: 0;
+  margin-bottom: 2%;
+
 }
 
 div#status_create button {
@@ -122,12 +124,13 @@ div.author {
   text-align: left;
   padding: 2% 7%;
 }
-
-div.author img {
-  border: 1px solid var(--blue-color);
-  border-radius: 3px;
-  height: 70px;
-  width: 70px;
+.faUserIcon {
+  /*border: 1px solid var(--blue-color);*/
+  /*border-radius: 3px;*/
+  /*height: 70px;*/
+  /*width: 70px;*/
+  font-size: 70px;
+  color: var(--blue-color)
 }
 
 .author_name,

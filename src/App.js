@@ -2,49 +2,37 @@ import React, {Component} from 'react';
 import './App.css';
 import Header from "./Header";
 import StatusCreate from "./StatusCreate";
+import UserDataService from "./DataService";
+
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: sessionStorage.getItem("username") || ""
-        };
-    }
-
-    componentDidMount() {
-
-        let userName = "";
-        const callbackForUserName = () => {
-            alert("Hello " + this.state.userName + "!");
-            sessionStorage.setItem("username", userName)
+            userName: "unknown"
         };
 
-        setTimeout (() => {
-            if (this.state.userName === "") {
-                userName = prompt('Podaj swoje imię:');
+        UserDataService.addObserver(this.onUserNameDefined)
 
-                if (userName !== "" && userName !== null) {
-                    this.setState({
-                        userName: userName
-                    }, callbackForUserName);
-                } else {
-                    console.log(userName);
-                    this.setState({
-                        userName: "unknown"
-                    }, () => alert("Hello " + this.state.userName + "!"))
-                }
-            }
-        }, 0)
     }
+
+    onUserNameDefined = (username) => {
+        this.setState({
+            userName: username
+        });
+    };
 
     render() {
 
         return (
             <div>
-                <Header name={this.state.userName}/>
-                <div className="container">
-                    <StatusCreate maxLetters={200} name={this.state.userName}/>
+                <div>
+                    <Header dataService={UserDataService} name={this.state.userName}/>
+                    <div className="container">
+                        <StatusCreate maxLetters={200} name={this.state.userName}/>
+                    </div>
                 </div>
+
             </div>
         );
     }
