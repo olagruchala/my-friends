@@ -5,6 +5,9 @@ import ModalUserName from "./ModalUserName";
 
 
 class Header extends React.Component {
+    constructor(props) {
+        super(props);
+    }
     render () {
 
         return (
@@ -15,9 +18,9 @@ class Header extends React.Component {
                     <h1>friends</h1>
                 </div>
                 <div className="hello_user">
-                    <span>Hello {this.props.userName}!</span> // TODO: this.props.userName nie działa
+                    <span>Hello {this.props.name}!</span>
                     <br/>
-                    <ModalUserName />
+                    <ModalUserName dataService={this.props.dataService}/>
 
                 </div>
             </header>

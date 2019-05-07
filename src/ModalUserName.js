@@ -9,12 +9,18 @@ class ModalUserName extends React.Component {
         this.state = {
             show: false,
             isLoggedIn: JSON.parse(sessionStorage.getItem("isLoggedIn")) || false,
-            userName: sessionStorage.getItem("username") || ""
+            userName: sessionStorage.getItem("username") || "unknown"
         };
 
         this.handleCancel = this.handleCancel.bind(this);
         this.handleSave = this.handleSave.bind(this);
         this.handleShow = this.handleShow.bind(this);
+    }
+
+    componentDidMount() {
+        if (this.state.userName !== "unknown") {
+            this.props.dataService.setNewData(this.state.userName); //set user name
+        }
     }
 
     handleCancel() {
@@ -31,9 +37,11 @@ class ModalUserName extends React.Component {
                 isLoggedIn: true,
                 userName: inputText.value
             }, () => {
+                this.props.dataService.setNewData(inputText.value); //set user name
                 sessionStorage.setItem("username", inputText.value);
                 sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
             });
+
         } else {
             this.setState({
                 show: false,
@@ -51,7 +59,11 @@ class ModalUserName extends React.Component {
             this.setState({
                 userName: "unknown",
                 isLoggedIn: false
-            }, () => sessionStorage.clear())
+            }, () => {
+                this.props.dataService.setNewData(this.state.userName);
+                sessionStorage.setItem("username", "unknown");
+                sessionStorage.setItem("isLoggedIn", JSON.stringify(false));
+            })
         }
     }
 
