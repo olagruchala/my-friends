@@ -2,21 +2,21 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCommentDots, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import React from "react";
 
-const STORAGE_NAME_PREFIX = "comment_panel-";
+const STORAGE_NAME_PREFIX = `comment_panel-`;
 
 //comment_panel-1
 
 class CommentPanel extends React.Component {
     constructor(props) {
         super(props);
-        this.state = JSON.parse(localStorage.getItem(STORAGE_NAME_PREFIX + props.id)) || {
+        this.state = JSON.parse(localStorage.getItem(this.getStorageName())) || {
             likesCounter: 0,
-            likesFlag: false, //FIXME wrong place, zamienic na currentUserLike zapisywane w SesionStorage dla następnego uzytkownika
-            commentsNumber: 0, //FIXME wrong, use comments.length
+            currentUserLike: false, //FIXME wrong place, zamienic na currentUserLike zapisywane w SesionStorage dla następnego uzytkownika
+            commentsCounter: 0, //FIXME wrong, use comments.length
             commentsFlag: false, //FIXME wrong place
             comments: [],
             displayComments: false
-        };
+        }
 
         this.likeHandler = this.likeHandler.bind(this);
         this.commentHandler = this.commentHandler.bind(this);
@@ -28,19 +28,19 @@ class CommentPanel extends React.Component {
     }
 
     likeHandler () {
-        console.log('this.state.likesCounter : ' + this.state.likesCounter);
-        console.log('this.state.likesFlag : ' + this.state.likesFlag);
+        // console.log('this.state.likesCounter : ' + this.state.likesCounter);
+        // console.log('this.state.currentUserLike : ' + this.state.currentUserLike);
 
         let callback = () => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
 
-        if (this.state.likesFlag) {
+        if (this.state.currentUserLike) {
             this.setState(prevState => ({
-                likesFlag: false,
+                currentUserLike: false,
                 likesCounter:  prevState.likesCounter - 1
                 }), callback);
         } else {
             this.setState(prevState => ({
-                likesFlag: true,
+                currentUserLike: true,
                 likesCounter: prevState.likesCounter + 1
             }), callback);
         }
@@ -53,14 +53,14 @@ class CommentPanel extends React.Component {
         if (this.state.commentsFlag) {
             this.setState(prevState => ({
                 commentsFlag: false,
-                commentsNumber:  prevState.commentsNumber - 1,
+                commentsCounter:  prevState.commentsCounter - 1,
                 displayComments: !prevState.displayComments
 
             }), callback)
         } else {
             this.setState(prevState => ({
                 commentsFlag: true,
-                commentsNumber:  prevState.commentsNumber + 1,
+                commentsCounter:  prevState.commentsCounter + 1,
                 displayComments: !prevState.displayComments
             }), callback)
         }
@@ -97,11 +97,11 @@ class CommentPanel extends React.Component {
 
                 <button className="comment_button"
                         name="comment"
-                        value={this.state.commentsNumber}
+                        value={this.state.commentsCounter}
                         onClick={this.commentHandler}
                 >
                     <FontAwesomeIcon icon={faCommentDots} />
-                    <span>{this.state.commentsNumber}</span>
+                    <span>{this.state.commentsCounter}</span>
                 </button>
 
                 {comm}

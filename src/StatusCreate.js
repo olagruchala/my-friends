@@ -24,7 +24,8 @@ class StatusCreate extends React.Component {
     };
 
     sendStatus = () => {
-        const localeDate = new Date().toLocaleString().substring(0, 17);
+        const localeDate = new Date().toLocaleDateString();
+        const localeTime = new Date().toLocaleTimeString();
 
         let callback = () => {
             localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state.statusArr))};
@@ -33,11 +34,12 @@ class StatusCreate extends React.Component {
             id: this.state.statusArr.length + 1,
             txtValue: this.state.textareaValue,
             date: localeDate,
+            time: localeTime,
             name: this.props.name
         };
 
         this.setState( prevState => ({
-            statusArr: [ statusData, ...prevState.statusArr ],
+            statusArr: [ statusData, ...prevState.statusArr ], // dorzucamy obiekt statusData na początek tablicy statusów
             letters: 0,
             textareaValue: ""
         }), callback);
@@ -66,9 +68,10 @@ class StatusCreate extends React.Component {
                 <div id="status_container">
                     {
                         this.state.statusArr.map(statusData => {
-                            return <StatusAdded key={statusData.id}
+                            return <StatusAdded id={statusData.id}
                                                 txtValue={statusData.txtValue}
                                                 date={statusData.date}
+                                                time={statusData.time}
                                                 name={statusData.name}
                             />
                         })
