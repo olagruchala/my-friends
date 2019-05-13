@@ -68,7 +68,8 @@ class StatusCreate extends React.Component {
                 <div id="status_container">
                     {
                         this.state.statusArr.map(statusData => {
-                            return <StatusAdded id={statusData.id}
+                            return <StatusAdded key={statusData.id}
+                                                id={statusData.id}
                                                 txtValue={statusData.txtValue}
                                                 date={statusData.date}
                                                 time={statusData.time}

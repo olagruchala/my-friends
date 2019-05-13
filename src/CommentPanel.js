@@ -16,7 +16,7 @@ class CommentPanel extends React.Component {
             commentsFlag: false, //FIXME wrong place
             comments: [],
             displayComments: false
-        }
+        };
 
         this.likeHandler = this.likeHandler.bind(this);
         this.commentHandler = this.commentHandler.bind(this);
@@ -68,6 +68,7 @@ class CommentPanel extends React.Component {
 
     render (){
 
+        const name = this.props;
         let comm = null;
         if (this.state.displayComments) {
             comm = (
