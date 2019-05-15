@@ -27,43 +27,43 @@ class ModalUserName extends React.Component {
 
     handleCancel() {
         this.setState({
-            show: false
+            show: false,
+            userName: "unknown"
         });
     }
 
     handleSubmit(event) {
 
         const form = event.currentTarget;
+        const nameText = this.formName;
+        // const emailText = this.formEmail;
+
         if (form.checkValidity() === false) {
+            console.log("invalid form");
             event.preventDefault();
             event.stopPropagation();
-        }
-        this.setState({ validated: true });
-
-        let inputText = this.inputField;
-        if (inputText.value !== "" && inputText.value !== null) {
             this.setState({
-                show: false,
-                isLoggedIn: true,
-                userName: inputText.value
-            }, () => {
-                this.props.dataService.setNewData(inputText.value); //set user name
-                sessionStorage.setItem("username", inputText.value);
-                sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
+                validated: true //potrzebne, żeby zrobić re-render
             });
-
         } else {
+            console.log("set state");
             this.setState({
-                userName: "unknown"
+                validated: true,
+                isLoggedIn: true,
+                userName: nameText.value
+            }, () => {
+                this.props.dataService.setNewData(nameText.value);
+                sessionStorage.setItem("username", nameText.value);
+                sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
             });
         }
     }
 
-    handleShow() {
+    handleShow () {
         console.log("show modal and validated: " + this.state.validated);
         if (!this.state.isLoggedIn) {
             this.setState({show: true}, () => {
-                ReactDOM.findDOMNode(this.inputField).focus();
+                ReactDOM.findDOMNode(this.formName).focus();
             });
         } else {
             this.setState({
@@ -102,7 +102,7 @@ class ModalUserName extends React.Component {
                                     required
                                     type="text"
                                     placeholder="Name"
-                                    ref={(ref) => { this.inputField = ref }}
+                                    ref={(ref) => { this.formName = ref }}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formEmail">
@@ -110,7 +110,7 @@ class ModalUserName extends React.Component {
                                     required
                                     type="email"
                                     placeholder="Email"
-                                    ref={(ref) => { this.inputField = ref }}
+                                    ref={(ref) => { this.formEmail = ref }}
                                 />
                             </Form.Group>
                             <Button type="submit">Save</Button>
