@@ -24,7 +24,6 @@ class LikePanel extends React.Component {
 
     checkUser() {
         if(this.props.name === "unknown") { // porównać this.props.name z name statusu zapisanym w localeStorage
-            console.log(this.props.name);
             this.setState({
                 currentUserLike: false
             },() => sessionStorage.setItem(this.getStorageName(), JSON.stringify(this.state)))

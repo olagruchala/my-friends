@@ -1,23 +1,25 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Button, Modal, InputGroup, FormControl } from "react-bootstrap";
+import { Button, Modal, Form } from "react-bootstrap";
 
 
 class ModalUserName extends React.Component {
     constructor(props){
         super(props);
         this.state = {
+            validated: false,
             show: false,
             isLoggedIn: JSON.parse(sessionStorage.getItem("isLoggedIn")) || false,
             userName: sessionStorage.getItem("username") || "unknown"
         };
 
         this.handleCancel = this.handleCancel.bind(this);
-        this.handleSave = this.handleSave.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
         this.handleShow = this.handleShow.bind(this);
     }
 
     componentDidMount() {
+        console.log("componentDidMount and validated: " + this.state.validated);
         if (this.state.userName !== "unknown") {
             this.props.dataService.setNewData(this.state.userName); //set user name
         }
@@ -29,7 +31,15 @@ class ModalUserName extends React.Component {
         });
     }
 
-    handleSave() {
+    handleSubmit(event) {
+
+        const form = event.currentTarget;
+        if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+        this.setState({ validated: true });
+
         let inputText = this.inputField;
         if (inputText.value !== "" && inputText.value !== null) {
             this.setState({
@@ -44,13 +54,13 @@ class ModalUserName extends React.Component {
 
         } else {
             this.setState({
-                show: false,
                 userName: "unknown"
             });
         }
     }
 
     handleShow() {
+        console.log("show modal and validated: " + this.state.validated);
         if (!this.state.isLoggedIn) {
             this.setState({show: true}, () => {
                 ReactDOM.findDOMNode(this.inputField).focus();
@@ -69,6 +79,7 @@ class ModalUserName extends React.Component {
 
     render () {
 
+        const { validated } = this.state;
 
         return (
             <>
@@ -81,24 +92,31 @@ class ModalUserName extends React.Component {
                         <Modal.Title>What's your name?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <InputGroup className="mb-3">
-                            <FormControl
-                                ref={(ref) => { this.inputField = ref }}
-                                // id="inputFieldID"
-                                aria-label="Default"
-                                aria-describedby="inputGroup-sizing-default"
-                            />
-                        </InputGroup>
+                        <Form
+                            noValidate
+                            validated={validated}
+                            onSubmit={e => this.handleSubmit(e)}
+                        >
+                            <Form.Group controlId="formName">
+                                <Form.Control
+                                    required
+                                    type="text"
+                                    placeholder="Name"
+                                    ref={(ref) => { this.inputField = ref }}
+                                />
+                            </Form.Group>
+                            <Form.Group controlId="formEmail">
+                                <Form.Control
+                                    required
+                                    type="email"
+                                    placeholder="Email"
+                                    ref={(ref) => { this.inputField = ref }}
+                                />
+                            </Form.Group>
+                            <Button type="submit">Save</Button>
+                        </Form>
                     </Modal.Body>
 
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={this.handleCancel}>
-                            Cancel
-                        </Button>
-                        <Button variant="info" onClick={this.handleSave}>
-                            Save
-                        </Button>
-                    </Modal.Footer>
                 </Modal>
             </>
         )
