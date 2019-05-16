@@ -2,6 +2,7 @@
 class DataService {
     observers = [];
     setNewData(newData) {
+        console.log(newData);
         this.observers.forEach(observer =>
             observer(newData)
         )

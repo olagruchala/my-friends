@@ -9,16 +9,20 @@ class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            userName: "unknown"
+            user: {
+                name: "unknown",
+                email: "unknown"
+            }
         };
 
         UserDataService.addObserver(this.onUserNameDefined)
 
     }
 
-    onUserNameDefined = (username) => {
+    onUserNameDefined = (user) => {
+        console.log("newData in App from DataService : " + user);
         this.setState({
-            userName: username
+            user: user
         });
     };
 
@@ -27,9 +31,9 @@ class App extends Component {
         return (
             <div>
                 <div>
-                    <Header dataService={UserDataService} name={this.state.userName}/>
+                    <Header dataService={UserDataService} name={this.state.user.name}/>
                     <div className="container">
-                        <StatusCreate maxLetters={200} name={this.state.userName}/>
+                        <StatusCreate maxLetters={200} name={this.state.user.name} email={this.state.user.email}/>
                     </div>
                 </div>
 

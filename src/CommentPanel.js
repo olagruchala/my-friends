@@ -12,9 +12,10 @@ class CommentPanel extends React.Component {
         super(props);
         this.state = JSON.parse(localStorage.getItem(this.getStorageName())) || {
             userName: this.props.name,
-            commentsCounter: 0, //FIXME wrong, use comments.length
-            commentsFlag: false, //FIXME wrong place
-            comments: [],
+            userEmail: this.props.email,
+            commentsCounter: 0, //FIXME wrong, use commentsArr.length
+            commentsFlag: false, //FIXME jesli email jest w tablicy comentsArr
+            commentsArr: [],
             displayComments: false
         };
 
@@ -26,8 +27,6 @@ class CommentPanel extends React.Component {
     getStorageName() {
         return STORAGE_NAME_PREFIX + this.props.id;
     }
-
-
 
     commentHandler () {
 

@@ -35,7 +35,8 @@ class StatusCreate extends React.Component {
             txtValue: this.state.textareaValue,
             date: localeDate,
             time: localeTime,
-            name: this.props.name
+            name: this.props.name,
+            email: this.props.email
         };
 
         this.setState( prevState => ({
@@ -74,6 +75,7 @@ class StatusCreate extends React.Component {
                                                 date={statusData.date}
                                                 time={statusData.time}
                                                 name={statusData.name}
+                                                email={statusData.email}
                             />
                         })
                     }

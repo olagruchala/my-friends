@@ -8,7 +8,7 @@ class StatusAdded extends React.Component {
 
     render() {
 
-        const {txtValue, date, time, name, id} = this.props;
+        const {txtValue, date, time, name, email, id} = this.props;
 
         let login;
         if (name !== "unknown") {
@@ -29,7 +29,7 @@ class StatusAdded extends React.Component {
                 {/*todo: textValue nie zawija się i nie mieści w divie jeśli jest bez spacji*/}
                 <div className="status_content">{txtValue}</div>
 
-                <CommentPanel id={id} name={name}/>
+                <CommentPanel id={id} name={name} email={email}/>
             </div>
         )
     }

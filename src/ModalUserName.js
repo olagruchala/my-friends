@@ -7,10 +7,15 @@ class ModalUserName extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            validated: false,
-            show: false,
-            isLoggedIn: JSON.parse(sessionStorage.getItem("isLoggedIn")) || false,
-            userName: sessionStorage.getItem("username") || "unknown"
+            isFormValid: false,
+            showModal: false,
+            isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
+
+            user: JSON.parse(localStorage.getItem("user")) || {
+                name: "unknown",
+                email: "unknown"
+            }
+            // isLoggedIn: (this.state.user.name !== "unknown")
         };
 
         this.handleCancel = this.handleCancel.bind(this);
@@ -19,67 +24,72 @@ class ModalUserName extends React.Component {
     }
 
     componentDidMount() {
-        console.log("componentDidMount and validated: " + this.state.validated);
-        if (this.state.userName !== "unknown") {
-            this.props.dataService.setNewData(this.state.userName); //set user name
+        if (this.state.user.name !== "unknown") {
+            this.props.dataService.setNewData(this.state.user);//set user
+            console.log("user.name in componentDidMount: " + this.state.user.name)
         }
     }
 
     handleCancel() {
         this.setState({
-            show: false,
-            userName: "unknown"
+            showModal: false,
+            user: {name: "unknown"}
         });
     }
 
     handleSubmit(event) {
-
         const form = event.currentTarget;
         const nameText = this.formName;
-        // const emailText = this.formEmail;
+        const emailText = this.formEmail;
 
         if (form.checkValidity() === false) {
             console.log("invalid form");
             event.preventDefault();
             event.stopPropagation();
             this.setState({
-                validated: true //potrzebne, żeby zrobić re-render
+                isFormValid: true //potrzebne, żeby zrobić re-render
             });
         } else {
             console.log("set state");
             this.setState({
-                validated: true,
+                isFormValid: true,
                 isLoggedIn: true,
-                userName: nameText.value
+                user: {
+                    name: nameText.value,
+                    email: emailText.value
+                }
             }, () => {
-                this.props.dataService.setNewData(nameText.value);
-                sessionStorage.setItem("username", nameText.value);
-                sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
+                this.props.dataService.setNewData(this.state.user); // set user
+                localStorage.setItem("user", JSON.stringify(this.state.user));
+                localStorage.setItem("isLoggedIn", JSON.stringify(true));
+                console.log("handleSubmit correct -> this.state.user : " + this.state.user);
             });
         }
     }
 
     handleShow () {
-        console.log("show modal and validated: " + this.state.validated);
         if (!this.state.isLoggedIn) {
-            this.setState({show: true}, () => {
+            this.setState({showModal: true}, () => {
                 ReactDOM.findDOMNode(this.formName).focus();
             });
         } else {
             this.setState({
-                userName: "unknown",
-                isLoggedIn: false
+                isLoggedIn: false,
+                user: {
+                    name: "unknown",
+                    email: ""
+                }
             }, () => {
-                this.props.dataService.setNewData(this.state.userName);
-                sessionStorage.setItem("username", "unknown");
-                sessionStorage.setItem("isLoggedIn", JSON.stringify(false));
+                this.props.dataService.setNewData(this.state.user);
+                localStorage.setItem("user", JSON.stringify(this.state.user));
+                localStorage.setItem("isLoggedIn", JSON.stringify(false));
             })
         }
     }
 
     render () {
 
-        const { validated } = this.state;
+        const { isFormValid } = this.state;
 
         return (
             <>
@@ -87,14 +97,14 @@ class ModalUserName extends React.Component {
                     {this.state.isLoggedIn? 'Logout' : 'Login'}
                 </Button>
 
-                <Modal show={this.state.show} onHide={this.handleCancel}>
+                <Modal show={this.state.showModal} onHide={this.handleCancel}>
                     <Modal.Header closeButton>
                         <Modal.Title>What's your name?</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <Form
                             noValidate
-                            validated={validated}
+                            validated={isFormValid}
                             onSubmit={e => this.handleSubmit(e)}
                         >
                             <Form.Group controlId="formName">

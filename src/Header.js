@@ -7,7 +7,6 @@ import ModalUserName from "./ModalUserName";
 class Header extends React.Component {
 
     render () {
-
         return (
             <header>
                 <div className="logo">
