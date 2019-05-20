@@ -1,5 +1,6 @@
 import React from "react";
 import LikePanel from "./LikePanel"
+import CommentAdded from "./CommentAdded"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots } from "@fortawesome/free-regular-svg-icons";
 
@@ -7,60 +8,102 @@ const STORAGE_NAME_PREFIX = `comment_panel-`;
 
 //comment_panel-1
 
+
 class CommentPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = JSON.parse(localStorage.getItem(this.getStorageName())) || {
-            userName: this.props.name,
-            userEmail: this.props.email,
-            commentsCounter: 0, //FIXME wrong, use commentsArr.length
-            commentsFlag: false, //FIXME jesli email jest w tablicy comentsArr
+            // user: {
+            //     name: this.props.name,
+            //     email: this.props.email
+            // },
             commentsArr: [],
-            displayComments: false
+            commentsCounter: 0, //FIXME wrong, use commentsArr.length
+            displayComments: false,
+            textareaValue: ""
         };
 
-
-        this.commentHandler = this.commentHandler.bind(this);
+        this.displayCommentsHandler = this.displayCommentsHandler.bind(this);
+        this.addNewComment = this.addNewComment.bind(this);
         this.getStorageName = this.getStorageName.bind(this);
+        this.textareaHandle = this.textareaHandle.bind(this);
+        this.storageCallback = this.storageCallback.bind(this);
     }
 
     getStorageName() {
         return STORAGE_NAME_PREFIX + this.props.id;
     }
 
-    commentHandler () {
+    storageCallback = () => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
 
-        let callback = () => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
 
-        if (this.state.commentsFlag) {
+    displayCommentsHandler () {
+
+        if (this.state.displayComments) {
             this.setState(prevState => ({
-                commentsFlag: false,
-                commentsCounter:  prevState.commentsCounter - 1,
                 displayComments: !prevState.displayComments
 
-            }), callback)
+            }), this.storageCallback)
         } else {
             this.setState(prevState => ({
-                commentsFlag: true,
-                commentsCounter:  prevState.commentsCounter + 1,
                 displayComments: !prevState.displayComments
-            }), callback)
+            }), this.storageCallback)
         }
     }
 
+    textareaHandle (e) {
+        this.setState({
+            textareaValue: e.target.value
+        });
+    };
+
+    addNewComment = (e) => {
+
+        let userData = {
+            id: this.state.commentsArr.length + 1,
+            name: this.props.name,
+            email: this.props.email,
+            textValue: this.state.textareaValue
+        };
+
+        if (e.keyCode === 13 && e.shiftKey === false) {
+            e.preventDefault(); // pozbywam się entera w textarea po wysłaniu komentarza
+            this.setState(prevState => ({
+                commentsArr: [userData, ...prevState.commentsArr], // dorzucamy nowy komentarz na początek tablicy
+                textareaValue: "",
+                commentsCounter: this.state.commentsArr.length + 1
+            }), this.storageCallback)}
+    };
+
+
+
     render (){
 
-        const { name, id } = this.props;
+        const { id, name, email } = this.props;
         let comm = null;
         if (this.state.displayComments) {
             comm = (
                 <div>
-                    <textarea rows="1" cols="30"
-                          className="comment_create"
-                          placeholder="Write a comment..."
+                    <textarea
+                        rows="1"
+                        cols="30"
+                        className="comment_create"
+                        placeholder="Write a comment..."
+                        onKeyDown={this.addNewComment}
+                        value={this.state.textareaValue}
+                        onChange={this.textareaHandle}
                     >
                     </textarea>
-                    <div className="comment_list">comment list</div>
+                    <div className="comment_list">
+                        { this.state.commentsArr.map(userData => {
+                            return <CommentAdded
+                                    key={userData.id}
+                                    name={userData.name}
+                                    email={userData.email}
+                                    textValue={userData.textValue}
+                                    />
+                        } )}
+                    </div>
                 </div>
             )
 
@@ -69,12 +112,12 @@ class CommentPanel extends React.Component {
         return (
             <div className="comment_panel">
 
-                <LikePanel id={id} name={name}/>
+                <LikePanel id={id} name={this.props.name} email={this.props.email}/>
 
                 <button className="comment_button"
                         name="comment"
                         value={this.state.commentsCounter}
-                        onClick={this.commentHandler}
+                        onClick={this.displayCommentsHandler}
                 >
                     <FontAwesomeIcon icon={faCommentDots} />
                     <span>{this.state.commentsCounter}</span>

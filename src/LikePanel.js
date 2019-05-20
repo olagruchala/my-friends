@@ -9,11 +9,17 @@ const STORAGE_NAME_PREFIX = `like_panel-`;
 class LikePanel extends React.Component {
     constructor(props) {
         super(props);
-        this.state = JSON.parse(sessionStorage.getItem(this.getStorageName())) || {
+        this.state = JSON.parse(localStorage.getItem(this.getStorageName())) || {
+            user: {
+                name: this.props.name,
+                email: this.props.email
+            },
             // userName: this.props.name,
             // status: localStorage.getItem("statuses"),
             likesCounter: 0,
-            currentUserLike: false
+            likesArr: [],
+            currentUserLike: false // todo: jesli uzytkownik polubił to jego mail dodaję do likesArr, czyli true,
+            // todo: a jesli kilknie jeszcze raz to usuwam jego mail z tablicy i mam false
         };
 
         this.likeHandler = this.likeHandler.bind(this);
@@ -26,7 +32,7 @@ class LikePanel extends React.Component {
         if(this.props.name === "unknown") { // porównać this.props.name z name statusu zapisanym w localeStorage
             this.setState({
                 currentUserLike: false
-            },() => sessionStorage.setItem(this.getStorageName(), JSON.stringify(this.state)))
+            },() => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state)))
         }
     }
 
@@ -36,7 +42,7 @@ class LikePanel extends React.Component {
 
     likeHandler () {
 
-        let callback = () => sessionStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
+        let callback = () => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
 
         if (this.state.currentUserLike) {
             this.setState(prevState => ({

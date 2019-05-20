@@ -2,9 +2,29 @@ import React from "react";
 import CommentPanel from "./CommentPanel";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser, faUserSecret} from "@fortawesome/free-solid-svg-icons";
+import UserDataService from "./DataService";
 
 
 class StatusAdded extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user: JSON.parse(localStorage.getItem("user")) || {
+                name: "unknown",
+                email: "unknown"
+            }
+        };
+
+        UserDataService.addObserver(this.onUserNameDefined)
+
+    }
+
+    onUserNameDefined = (user) => {
+        console.log("newData about loggedIn user in StatusAdded from DataService : " + user);
+        this.setState({
+            user: user
+        });
+    };
 
     render() {
 
@@ -29,7 +49,7 @@ class StatusAdded extends React.Component {
                 {/*todo: textValue nie zawija się i nie mieści w divie jeśli jest bez spacji*/}
                 <div className="status_content">{txtValue}</div>
 
-                <CommentPanel id={id} name={name} email={email}/>
+                <CommentPanel id={id} name={this.state.user.name} email={this.state.user.email}/>
             </div>
         )
     }

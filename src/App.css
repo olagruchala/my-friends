@@ -195,11 +195,27 @@ textarea.comment_create {
 }
 
 div.comment_list {
-  border: 1px solid red;
+  border: 1px dotted var(--blue-color);
+  border-radius: 3px;
   width: 76%;
-  margin: 2% auto;
+  margin: 0 auto;
   padding: 2%;
-  text-align: center;
+  text-align: left;
+  color: var(--blue-color);
 }
+
+div.comment_list p {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 3%;
+}
+
+div.comment_list span {
+  color: var(--dark-blue-color);
+  font-size: small;
+}
+
+
+
 
 
