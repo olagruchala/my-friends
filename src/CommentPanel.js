@@ -13,10 +13,6 @@ class CommentPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = JSON.parse(localStorage.getItem(this.getStorageName())) || {
-            // user: {
-            //     name: this.props.name,
-            //     email: this.props.email
-            // },
             commentsArr: [],
             commentsCounter: 0, //FIXME wrong, use commentsArr.length
             displayComments: false,
@@ -67,9 +63,9 @@ class CommentPanel extends React.Component {
         };
 
         if (e.keyCode === 13 && e.shiftKey === false) {
-            e.preventDefault(); // pozbywam się entera w textarea po wysłaniu komentarza
+            e.preventDefault(); // delete enter in textarea after send a new comment
             this.setState(prevState => ({
-                commentsArr: [userData, ...prevState.commentsArr], // dorzucamy nowy komentarz na początek tablicy
+                commentsArr: [userData, ...prevState.commentsArr], // push new comment to begin of array
                 textareaValue: "",
                 commentsCounter: this.state.commentsArr.length + 1
             }), this.storageCallback)}
@@ -79,10 +75,10 @@ class CommentPanel extends React.Component {
 
     render (){
 
-        const { id, name, email } = this.props;
-        let comm = null;
+        const { id } = this.props;
+        let comment = null;
         if (this.state.displayComments) {
-            comm = (
+            comment = (
                 <div>
                     <textarea
                         rows="1"
@@ -112,7 +108,7 @@ class CommentPanel extends React.Component {
         return (
             <div className="comment_panel">
 
-                <LikePanel id={id} name={this.props.name} email={this.props.email}/>
+                <LikePanel id={id}/>
 
                 <button className="comment_button"
                         name="comment"
@@ -123,7 +119,7 @@ class CommentPanel extends React.Component {
                     <span>{this.state.commentsCounter}</span>
                 </button>
 
-                {comm}
+                {comment}
 
             </div>
         )

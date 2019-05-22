@@ -20,7 +20,7 @@ class StatusAdded extends React.Component {
     }
 
     onUserNameDefined = (user) => {
-        console.log("newData about loggedIn user in StatusAdded from DataService : " + user);
+        console.log("newData about loggedIn user in StatusAdded from DataService");
         this.setState({
             user: user
         });
@@ -28,7 +28,7 @@ class StatusAdded extends React.Component {
 
     render() {
 
-        const {txtValue, date, time, name, email, id} = this.props;
+        const {txtValue, date, time, name, id} = this.props;
 
         let login;
         if (name !== "unknown") {

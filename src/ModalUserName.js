@@ -15,7 +15,7 @@ class ModalUserName extends React.Component {
                 name: "unknown",
                 email: "unknown"
             }
-            // isLoggedIn: (this.state.user.name !== "unknown")
+            // todo: isLoggedIn: (this.state.user.name !== "unknown")
         };
 
         this.handleCancel = this.handleCancel.bind(this);
@@ -26,7 +26,6 @@ class ModalUserName extends React.Component {
     componentDidMount() {
         if (this.state.user.name !== "unknown") {
             this.props.dataService.setNewData(this.state.user);//set user
-            console.log("user.name in componentDidMount: " + this.state.user.name)
         }
     }
 
@@ -69,7 +68,7 @@ class ModalUserName extends React.Component {
 
     handleShow () {
         if (!this.state.isLoggedIn) {
-            this.setState({showModal: true}, () => {
+            this.setState({showModal: true},() => {
                 ReactDOM.findDOMNode(this.formName).focus();
             });
         } else {
@@ -77,7 +76,7 @@ class ModalUserName extends React.Component {
                 isLoggedIn: false,
                 user: {
                     name: "unknown",
-                    email: ""
+                    email: "unknown"
                 }
             }, () => {
                 this.props.dataService.setNewData(this.state.user);

@@ -40,7 +40,7 @@ class StatusCreate extends React.Component {
         };
 
         this.setState( prevState => ({
-            statusArr: [ statusData, ...prevState.statusArr ], // dorzucamy obiekt statusData na początek tablicy statusów
+            statusArr: [ statusData, ...prevState.statusArr ],
             letters: 0,
             textareaValue: ""
         }), callback);

@@ -20,7 +20,7 @@ class App extends Component {
     }
 
     onUserNameDefined = (user) => {
-        console.log("newData in App from DataService : " + user);
+        console.log(`newData in App.js from DataService`);
         this.setState({
             user: user
         });

@@ -1,6 +1,7 @@
 import React from 'react';
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import UserDataService from "./DataService";
 
 const STORAGE_NAME_PREFIX = `like_panel-`;
 
@@ -9,30 +10,44 @@ const STORAGE_NAME_PREFIX = `like_panel-`;
 class LikePanel extends React.Component {
     constructor(props) {
         super(props);
-        this.state = JSON.parse(localStorage.getItem(this.getStorageName())) || {
-            user: {
-                name: this.props.name,
-                email: this.props.email
+        this.state = {
+            user: JSON.parse(localStorage.getItem("user")) || {
+                name: "unknown",
+                email: "unknown"
             },
-            // userName: this.props.name,
-            // status: localStorage.getItem("statuses"),
-            likesCounter: 0,
-            likesArr: [],
-            currentUserLike: false // todo: jesli uzytkownik polubił to jego mail dodaję do likesArr, czyli true,
-            // todo: a jesli kilknie jeszcze raz to usuwam jego mail z tablicy i mam false
+            likes: JSON.parse(localStorage.getItem(this.getStorageName())) || {
+                likesCounter: 0,
+                likesArr: [],
+                currentUserLike: false
+            }
         };
+
+        UserDataService.addObserver(this.onUserNameDefined);
 
         this.likeHandler = this.likeHandler.bind(this);
         this.getStorageName = this.getStorageName.bind(this);
         this.checkUser = this.checkUser.bind(this);
 
+
     }
 
+    onUserNameDefined = (user) => {
+        console.log("newData about loggedIn user in LikePanel from DataService");
+        this.setState({
+            user: user
+        });
+    };
+
     checkUser() {
-        if(this.props.name === "unknown") { // porównać this.props.name z name statusu zapisanym w localeStorage
-            this.setState({
-                currentUserLike: false
-            },() => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state)))
+        if(this.state.user.name === "unknown") {
+            console.log("user is unknown");
+            // todo: add tooltip to like button, and disable button
+
+            // this.setState(prevState => ({
+            //     likes: Object.assign(prevState.likes, {currentUserLike: true})
+            // }),() => {
+            //     localStorage.setItem(this.getStorageName(), JSON.stringify(this.state.likes));
+            // })
         }
     }
 
@@ -42,18 +57,29 @@ class LikePanel extends React.Component {
 
     likeHandler () {
 
-        let callback = () => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
+        let callback = () => {
+            localStorage.setItem(this.getStorageName(), JSON.stringify(this.state.likes));
+        };
 
-        if (this.state.currentUserLike) {
-            this.setState(prevState => ({
-                currentUserLike: false,
-                likesCounter:  prevState.likesCounter - 1
-            }), callback);
-        } else {
-            this.setState(prevState => ({
-                currentUserLike: true,
-                likesCounter: prevState.likesCounter + 1
-            }), callback);
+        let userEmail = this.state.user.email;
+        let likesArr = this.state.likes.likesArr;
+
+        if (userEmail !== "unknown") {
+            if (!likesArr.includes(userEmail)) {
+                likesArr.push(userEmail);
+                this.setState(prevState => ({
+                    likes: Object.assign(prevState.likes, {likesArr: likesArr, likesCounter: likesArr.length})
+                }), callback)
+            } else {
+                let checkEmailIndex = (element) => {
+                    return element === userEmail
+                };
+                let emailIndex = likesArr.findIndex(checkEmailIndex);
+                likesArr.splice(emailIndex,1);
+                this.setState(prevState => ({
+                    likes: Object.assign(prevState.likes, {likesArr: likesArr, likesCounter: likesArr.length})
+                }), callback)
+            }
         }
     }
 
@@ -63,15 +89,19 @@ class LikePanel extends React.Component {
 
     render () {
 
-        return(
-            <button className="like_button"
+        return (
+            <div>
+                <button
+                    disabled={this.state.user.email === "unknown"}
+                    className="like_button"
                     name="like"
-                    value={this.state.likesCounter}
+                    value={this.state.likes.likesCounter}
                     onClick={this.likeHandler}
-            >
-                <FontAwesomeIcon icon={faThumbsUp} />
-                <span>{this.state.likesCounter}</span>
-            </button>
+                >
+                    <FontAwesomeIcon icon={faThumbsUp} />
+                    <span>{this.state.likes.likesCounter}</span>
+                </button>
+            </div>
         )
     }
 }
