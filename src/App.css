@@ -47,10 +47,9 @@ div.hello_user span {
   font-size: large;
   font-weight: bold;
   color: var(--dark-blue-color);
-
 }
 
-.container {
+.global-container {
   background-color: var(--blue-color);
   border-radius: 3px;
   width: 80%;
@@ -86,10 +85,9 @@ div#status_create small {
   color: var(--dark-blue-color);
   padding: 0;
   margin-bottom: 2%;
-
 }
 
-div#status_create button {
+#send {
   background-color: transparent;
   display: block;
   margin: 0 auto;
@@ -99,6 +97,7 @@ div#status_create button {
   border: 1px solid var(--blue-color);
   border-radius: 3px;
   transition-duration: 0.3s;
+  outline-color: var(--blue-color);
 }
 
 #send:hover{
@@ -127,7 +126,7 @@ div.author {
 }
 .faUserIcon {
   font-size: 70px;
-  color: var(--blue-color)
+  color: var(--blue-color);
 }
 
 .status_content {
@@ -155,36 +154,50 @@ div.author {
   text-align: center;
 }
 
-.comment_panel button {
+.comment_button, .comment_button:disabled {
+  outline-color: var(--blue-color);
+  border: 1px solid var(--blue-color);
   background-color: transparent;
-  width: 48%;
+  width: 50%;
   text-align: center;
-  float: left;
-  margin: 0 1%;
+  margin: 7% 1% 1% 1%;
   padding: 1% 5%;
   font-size: 15px;
   color: white;
-  border: 1px solid var(--blue-color);
   border-radius: 3px;
   transition-duration: 0.4s;
 }
-.comment_panel button * {
+
+.comment_button * {
   color: var(--blue-color);
   padding: 1%;
-
 }
 
-.comment_panel button:hover {
+.comment_button:hover {
   background-color: var(--blue-color);
   outline-color: var(--blue-color);
 }
 
-.comment_panel button:hover * {
+.comment_button:focus {
+  outline-color: var(--blue-color);
+}
+.comment_button:hover * {
   color: var(--white-color);
 }
 
+.btn-right {
+  margin-right: 49% ;
+}
+
+.btn-left {
+  margin-left: 49%;
+}
+
+.btn-left:disabled {
+  margin-left: 49%;
+}
+
 textarea.comment_create {
-  clear: both;
   padding: 2%;
   font-size: 15px;
   border: 1px solid var(--blue-color);

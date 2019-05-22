@@ -3,6 +3,7 @@ import LikePanel from "./LikePanel"
 import CommentAdded from "./CommentAdded"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentDots } from "@fortawesome/free-regular-svg-icons";
+import {Col, Container, Row} from "react-bootstrap";
 
 const STORAGE_NAME_PREFIX = `comment_panel-`;
 
@@ -106,22 +107,28 @@ class CommentPanel extends React.Component {
         }
 
         return (
-            <div className="comment_panel">
-
-                <LikePanel id={id}/>
-
-                <button className="comment_button"
-                        name="comment"
-                        value={this.state.commentsCounter}
-                        onClick={this.displayCommentsHandler}
-                >
-                    <FontAwesomeIcon icon={faCommentDots} />
-                    <span>{this.state.commentsCounter}</span>
-                </button>
-
-                {comment}
-
-            </div>
+            <Container className="comment-container">
+                <Row>
+                    <Col>
+                        <LikePanel id={id}/>
+                    </Col>
+                    <Col>
+                        <button className="comment_button btn-right"
+                                name="comment"
+                                value={this.state.commentsCounter}
+                                onClick={this.displayCommentsHandler}
+                        >
+                            <FontAwesomeIcon icon={faCommentDots} />
+                            <span>{this.state.commentsCounter}</span>
+                        </button>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col >
+                        {comment}
+                    </Col>
+                </Row>
+            </Container>
         )
     }
 }

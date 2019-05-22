@@ -7,7 +7,7 @@ class CommentAdded extends React.Component {
 
         return (
             <div className="comment_added">
-                <p className="">{ name } write: <span> {textValue} </span></p>
+                <p className="">{ name } : <span> {textValue} </span></p>
 
             </div>
         )

@@ -2,6 +2,7 @@ import React from 'react';
 import { faThumbsUp } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import UserDataService from "./DataService";
+import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 
 const STORAGE_NAME_PREFIX = `like_panel-`;
 
@@ -89,18 +90,52 @@ class LikePanel extends React.Component {
 
     render () {
 
+        let likeButton = null;
+        if (this.state.user.email === "unknown") {
+            likeButton = (
+
+                <OverlayTrigger overlay={<Tooltip id="tooltip-disabled">Please login</Tooltip>}>
+                    <span className="">
+                    <Button
+                        disabled
+                        style={{ pointerEvents: 'none' }}
+                        className="comment_button btn-left"
+                    >
+                        <FontAwesomeIcon icon={faThumbsUp} />
+                        <span>{this.state.likes.likesCounter}</span>
+                    </Button>
+                    </span>
+                </OverlayTrigger>
+            )
+        } else {
+            likeButton = (
+            <button
+                className="comment_button btn-left"
+                name="like"
+                value={this.state.likes.likesCounter}
+                onClick={this.likeHandler}
+            >
+                <FontAwesomeIcon icon={faThumbsUp} />
+                <span>{this.state.likes.likesCounter}</span>
+            </button>
+            )
+        }
+
+
         return (
+
             <div>
-                <button
-                    disabled={this.state.user.email === "unknown"}
-                    className="like_button"
-                    name="like"
-                    value={this.state.likes.likesCounter}
-                    onClick={this.likeHandler}
-                >
-                    <FontAwesomeIcon icon={faThumbsUp} />
-                    <span>{this.state.likes.likesCounter}</span>
-                </button>
+                {likeButton}
+                {/*<button*/}
+                {/*    // disabled={this.state.user.email !== "unknown"}*/}
+                {/*    className="like_button"*/}
+                {/*    name="like"*/}
+                {/*    value={this.state.likes.likesCounter}*/}
+                {/*    onClick={this.likeHandler}*/}
+                {/*>*/}
+                {/*    <FontAwesomeIcon icon={faThumbsUp} />*/}
+                {/*    <span>{this.state.likes.likesCounter}</span>*/}
+                {/*</button>*/}
             </div>
         )
     }

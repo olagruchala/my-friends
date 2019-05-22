@@ -32,8 +32,8 @@ class App extends Component {
             <div>
                 <div>
                     <Header dataService={UserDataService} name={this.state.user.name}/>
-                    <div className="container">
-                        <StatusCreate maxLetters={200} name={this.state.user.name} email={this.state.user.email}/>
+                    <div className="global-container">
+                        <StatusCreate maxLetters={300} name={this.state.user.name} email={this.state.user.email}/>
                     </div>
                 </div>
 
