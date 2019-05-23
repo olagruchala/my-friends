@@ -4,6 +4,7 @@ import CommentAdded from "./CommentAdded"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCommentDots} from "@fortawesome/free-regular-svg-icons";
 import {Col, Container, Row} from "react-bootstrap";
+import UserDataService from "./DataService";
 
 const STORAGE_NAME_PREFIX = `comment_panel-`;
 
@@ -24,7 +25,19 @@ class CommentPanel extends React.Component {
         this.getStorageName = this.getStorageName.bind(this);
         this.textareaHandle = this.textareaHandle.bind(this);
         this.storageCallback = this.storageCallback.bind(this);
+
+        UserDataService.addObserver(this.onUserNameDefined)
+
     }
+
+    // hide comments if the user logs out
+    onUserNameDefined = (user) => {
+        if (user.name === "unknown") {
+            this.setState({
+                displayComments: false
+            }, () => console.log(this.state))
+        }
+    };
 
     getStorageName() {
         return STORAGE_NAME_PREFIX + this.props.id;
@@ -57,7 +70,6 @@ class CommentPanel extends React.Component {
             email: this.props.email,
             textValue: this.state.textareaValue
         };
-
 
         if (userData.textValue.trim().length > 0) {
             if (e.keyCode === 13 && e.shiftKey === false) {

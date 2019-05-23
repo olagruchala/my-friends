@@ -86,15 +86,15 @@ class ModalUserName extends React.Component {
 
     render() {
 
-        const {isFormValid} = this.state;
+        const {isFormValid, showModal, isLoggedIn} = this.state;
 
         return (
             <>
                 <Button variant="info" onClick={this.handleShow}>
-                    {this.state.isLoggedIn ? 'Logout' : 'Login'}
+                    {isLoggedIn ? 'Logout' : 'Login'}
                 </Button>
 
-                <Modal show={this.state.showModal} onHide={this.handleCancel}>
+                <Modal show={showModal} onHide={this.handleCancel}>
                     <Modal.Header closeButton>
                         <Modal.Title>What's your name?</Modal.Title>
                     </Modal.Header>
