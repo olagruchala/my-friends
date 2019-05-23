@@ -40,11 +40,18 @@ class StatusCreate extends React.Component {
             email: this.props.email
         };
 
-        this.setState(prevState => ({
-            statusArr: [statusData, ...prevState.statusArr],
-            letters: 0,
-            textareaValue: ""
-        }), storageCallback);
+        if (statusData.txtValue.trim().length > 0) {
+            this.setState(prevState => ({
+                statusArr: [statusData, ...prevState.statusArr],
+                letters: 0,
+                textareaValue: ""
+            }), storageCallback);
+        } else {
+            this.setState({
+                textareaValue: ""
+            })
+        }
+
     };
 
     render() {

@@ -58,14 +58,18 @@ class CommentPanel extends React.Component {
             textValue: this.state.textareaValue
         };
 
-        if (e.keyCode === 13 && e.shiftKey === false) {
-            e.preventDefault(); // delete enter in textarea after send a new comment
-            this.setState(prevState => ({
-                commentsArr: [userData, ...prevState.commentsArr], // push new comment to begin of array
-                textareaValue: "",
-                commentsCounter: this.state.commentsArr.length + 1
-            }), this.storageCallback)
+
+        if (userData.textValue.trim().length > 0) {
+            if (e.keyCode === 13 && e.shiftKey === false) {
+                e.preventDefault(); // delete enter in textarea after send a new comment
+                this.setState(prevState => ({
+                    commentsArr: [userData, ...prevState.commentsArr], // push new comment to begin of array
+                    textareaValue: "",
+                    commentsCounter: this.state.commentsArr.length + 1
+                }), this.storageCallback)
+            }
         }
+
     };
 
     render() {

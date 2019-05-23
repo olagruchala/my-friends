@@ -205,6 +205,7 @@ textarea.comment_create {
   width: 76%;
   margin: 2% auto;
   text-align: left;
+  resize: none;
 }
 
 div.comment_list {
