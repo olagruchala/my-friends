@@ -49,7 +49,7 @@ div.hello_user span {
   color: var(--dark-blue-color);
 }
 
-.global-container {
+.body-container {
   background-color: var(--blue-color);
   border-radius: 3px;
   width: 80%;
@@ -208,7 +208,7 @@ textarea.comment_create {
 }
 
 div.comment_list {
-  border: 1px dotted var(--blue-color);
+  /*border: 1px dotted var(--blue-color);*/
   border-radius: 3px;
   width: 76%;
   margin: 0 auto;

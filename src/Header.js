@@ -3,10 +3,9 @@ import React from "react";
 import './App.css';
 import ModalUserName from "./ModalUserName";
 
-
 class Header extends React.Component {
 
-    render () {
+    render() {
         return (
             <header>
                 <div className="logo">
@@ -18,7 +17,6 @@ class Header extends React.Component {
                     <span>Hello {this.props.name}!</span>
                     <br/>
                     <ModalUserName dataService={this.props.dataService}/>
-
                 </div>
             </header>
         )

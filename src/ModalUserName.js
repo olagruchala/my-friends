@@ -1,10 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Button, Modal, Form } from "react-bootstrap";
-
+import {Button, Modal, Form} from "react-bootstrap";
 
 class ModalUserName extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             isFormValid: false,
@@ -21,6 +20,7 @@ class ModalUserName extends React.Component {
         this.handleCancel = this.handleCancel.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleShow = this.handleShow.bind(this);
+
     }
 
     componentDidMount() {
@@ -31,8 +31,7 @@ class ModalUserName extends React.Component {
 
     handleCancel() {
         this.setState({
-            showModal: false,
-            user: {name: "unknown"}
+            showModal: false
         });
     }
 
@@ -46,7 +45,7 @@ class ModalUserName extends React.Component {
             event.preventDefault();
             event.stopPropagation();
             this.setState({
-                isFormValid: true //potrzebne, żeby zrobić re-render
+                isFormValid: true // needed to do rerender
             });
         } else {
             console.log("set state");
@@ -61,14 +60,13 @@ class ModalUserName extends React.Component {
                 this.props.dataService.setNewData(this.state.user); // set user
                 localStorage.setItem("user", JSON.stringify(this.state.user));
                 localStorage.setItem("isLoggedIn", JSON.stringify(true));
-                console.log("handleSubmit correct -> this.state.user : " + this.state.user);
             });
         }
     }
 
-    handleShow () {
+    handleShow() {
         if (!this.state.isLoggedIn) {
-            this.setState({showModal: true},() => {
+            this.setState({showModal: true}, () => {
                 ReactDOM.findDOMNode(this.formName).focus();
             });
         } else {
@@ -86,14 +84,14 @@ class ModalUserName extends React.Component {
         }
     }
 
-    render () {
+    render() {
 
-        const { isFormValid } = this.state;
+        const {isFormValid} = this.state;
 
         return (
             <>
                 <Button variant="info" onClick={this.handleShow}>
-                    {this.state.isLoggedIn? 'Logout' : 'Login'}
+                    {this.state.isLoggedIn ? 'Logout' : 'Login'}
                 </Button>
 
                 <Modal show={this.state.showModal} onHide={this.handleCancel}>
@@ -111,7 +109,9 @@ class ModalUserName extends React.Component {
                                     required
                                     type="text"
                                     placeholder="Name"
-                                    ref={(ref) => { this.formName = ref }}
+                                    ref={(ref) => {
+                                        this.formName = ref
+                                    }}
                                 />
                             </Form.Group>
                             <Form.Group controlId="formEmail">
@@ -119,13 +119,14 @@ class ModalUserName extends React.Component {
                                     required
                                     type="email"
                                     placeholder="Email"
-                                    ref={(ref) => { this.formEmail = ref }}
+                                    ref={(ref) => {
+                                        this.formEmail = ref
+                                    }}
                                 />
                             </Form.Group>
                             <Button type="submit">Save</Button>
                         </Form>
                     </Modal.Body>
-
                 </Modal>
             </>
         )

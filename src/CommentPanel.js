@@ -1,21 +1,20 @@
 import React from "react";
 import LikePanel from "./LikePanel"
 import CommentAdded from "./CommentAdded"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCommentDots } from "@fortawesome/free-regular-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCommentDots} from "@fortawesome/free-regular-svg-icons";
 import {Col, Container, Row} from "react-bootstrap";
 
 const STORAGE_NAME_PREFIX = `comment_panel-`;
 
 //comment_panel-1
 
-
 class CommentPanel extends React.Component {
     constructor(props) {
         super(props);
         this.state = JSON.parse(localStorage.getItem(this.getStorageName())) || {
             commentsArr: [],
-            commentsCounter: 0, //FIXME wrong, use commentsArr.length
+            commentsCounter: 0,
             displayComments: false,
             textareaValue: ""
         };
@@ -33,13 +32,10 @@ class CommentPanel extends React.Component {
 
     storageCallback = () => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
 
-
-    displayCommentsHandler () {
-
+    displayCommentsHandler() {
         if (this.state.displayComments) {
             this.setState(prevState => ({
                 displayComments: !prevState.displayComments
-
             }), this.storageCallback)
         } else {
             this.setState(prevState => ({
@@ -48,14 +44,13 @@ class CommentPanel extends React.Component {
         }
     }
 
-    textareaHandle (e) {
+    textareaHandle(e) {
         this.setState({
             textareaValue: e.target.value
         });
     };
 
     addNewComment = (e) => {
-
         let userData = {
             id: this.state.commentsArr.length + 1,
             name: this.props.name,
@@ -69,15 +64,15 @@ class CommentPanel extends React.Component {
                 commentsArr: [userData, ...prevState.commentsArr], // push new comment to begin of array
                 textareaValue: "",
                 commentsCounter: this.state.commentsArr.length + 1
-            }), this.storageCallback)}
+            }), this.storageCallback)
+        }
     };
 
+    render() {
 
-
-    render (){
-
-        const { id } = this.props;
+        const {id} = this.props;
         let comment = null;
+
         if (this.state.displayComments) {
             comment = (
                 <div>
@@ -92,14 +87,14 @@ class CommentPanel extends React.Component {
                     >
                     </textarea>
                     <div className="comment_list">
-                        { this.state.commentsArr.map(userData => {
+                        {this.state.commentsArr.map(userData => {
                             return <CommentAdded
-                                    key={userData.id}
-                                    name={userData.name}
-                                    email={userData.email}
-                                    textValue={userData.textValue}
-                                    />
-                        } )}
+                                key={userData.id}
+                                name={userData.name}
+                                email={userData.email}
+                                textValue={userData.textValue}
+                            />
+                        })}
                     </div>
                 </div>
             )
@@ -118,13 +113,13 @@ class CommentPanel extends React.Component {
                                 value={this.state.commentsCounter}
                                 onClick={this.displayCommentsHandler}
                         >
-                            <FontAwesomeIcon icon={faCommentDots} />
+                            <FontAwesomeIcon icon={faCommentDots}/>
                             <span>{this.state.commentsCounter}</span>
                         </button>
                     </Col>
                 </Row>
                 <Row>
-                    <Col >
+                    <Col>
                         {comment}
                     </Col>
                 </Row>

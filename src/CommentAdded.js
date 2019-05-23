@@ -3,12 +3,12 @@ import React from "react";
 class CommentAdded extends React.Component {
 
     render() {
-        const { name, textValue } = this.props;
+
+        const {name, textValue} = this.props;
 
         return (
             <div className="comment_added">
-                <p className="">{ name } : <span> {textValue} </span></p>
-
+                <p className="">{name}: <span> {textValue} </span></p>
             </div>
         )
     }

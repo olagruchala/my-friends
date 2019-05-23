@@ -1,11 +1,10 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './App.css';
 import Header from "./Header";
 import StatusCreate from "./StatusCreate";
 import UserDataService from "./DataService";
 
-
-class App extends Component {
+class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,8 +18,8 @@ class App extends Component {
 
     }
 
+    // Set newData in this.state.user App.js from DataService
     onUserNameDefined = (user) => {
-        console.log(`newData in App.js from DataService`);
         this.setState({
             user: user
         });
@@ -32,11 +31,10 @@ class App extends Component {
             <div>
                 <div>
                     <Header dataService={UserDataService} name={this.state.user.name}/>
-                    <div className="global-container">
+                    <div className="body-container">
                         <StatusCreate maxLetters={300} name={this.state.user.name} email={this.state.user.email}/>
                     </div>
                 </div>
-
             </div>
         );
     }

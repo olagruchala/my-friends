@@ -16,7 +16,7 @@ class StatusCreate extends React.Component {
         this.textareaHandle = this.textareaHandle.bind(this);
     }
 
-    textareaHandle (e) {
+    textareaHandle(e) {
         this.setState({
             letters: e.target.value.length,
             textareaValue: e.target.value
@@ -27,8 +27,9 @@ class StatusCreate extends React.Component {
         const localeDate = new Date().toLocaleDateString();
         const localeTime = new Date().toLocaleTimeString();
 
-        let callback = () => {
-            localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state.statusArr))};
+        let storageCallback = () => {
+            localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state.statusArr))
+        };
 
         let statusData = {
             id: this.state.statusArr.length + 1,
@@ -39,11 +40,11 @@ class StatusCreate extends React.Component {
             email: this.props.email
         };
 
-        this.setState( prevState => ({
-            statusArr: [ statusData, ...prevState.statusArr ],
+        this.setState(prevState => ({
+            statusArr: [statusData, ...prevState.statusArr],
             letters: 0,
             textareaValue: ""
-        }), callback);
+        }), storageCallback);
     };
 
     render() {
