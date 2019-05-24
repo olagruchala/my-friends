@@ -27,7 +27,7 @@ class StatusAdded extends React.Component {
 
     render() {
 
-        const {txtValue, date, time, name, id} = this.props;
+        const {txtValue, date, time, name, id, color} = this.props;
         let login;
 
         if (name !== "unknown") {
@@ -39,7 +39,7 @@ class StatusAdded extends React.Component {
         return (
             <div className="status_added">
                 <div className="author">
-                    <FontAwesomeIcon className="faUserIcon" icon={login} >
+                    <FontAwesomeIcon className="faUserIcon" style = {{color : color}} icon={login} >
                     </FontAwesomeIcon>
                     <p className="author_name">{name}</p>
                     <small className="status_data">{date}, {time}</small>

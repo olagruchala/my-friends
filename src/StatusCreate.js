@@ -7,13 +7,22 @@ class StatusCreate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            statusArr: JSON.parse(localStorage.getItem(STORAGE_NAME)) || [],
+            statusArr: JSON.parse(localStorage.getItem(STORAGE_NAME)) || [{
+                id: 0,
+                txtValue: "Hi, maybe some movie today's evening?",
+                date: new Date().toLocaleTimeString(),
+                time: new Date().toLocaleTimeString(),
+                name: "Ola",
+                email: "",
+                color: this.chooseColor()
+            }],
             letters: 0,
             textareaValue: ""
         };
 
         this.sendStatus = this.sendStatus.bind(this);
         this.textareaHandle = this.textareaHandle.bind(this);
+        this.chooseColor = this.chooseColor.bind(this);
     }
 
     textareaHandle(e) {
@@ -21,6 +30,11 @@ class StatusCreate extends React.Component {
             letters: e.target.value.length,
             textareaValue: e.target.value
         });
+    };
+
+    chooseColor = () => {
+        let colorArr = ["#E84291", "#F7AC13", "#2192A6"];
+        return colorArr[Math.floor(Math.random() * colorArr.length)];
     };
 
     sendStatus = () => {
@@ -37,7 +51,8 @@ class StatusCreate extends React.Component {
             date: localeDate,
             time: localeTime,
             name: this.props.name,
-            email: this.props.email
+            email: this.props.email,
+            color: this.chooseColor()
         };
 
         if (statusData.txtValue.trim().length > 0) {
@@ -84,6 +99,7 @@ class StatusCreate extends React.Component {
                                                 time={statusData.time}
                                                 name={statusData.name}
                                                 email={statusData.email}
+                                                color={statusData.color}
                             />
                         })
                     }
