@@ -103,7 +103,7 @@ class CommentPanel extends React.Component {
                     >
                     </textarea>
                     <div className="comment_list">
-                        {this.state.commentsArr.map(userData => {
+                        { this.state.commentsArr.map(userData => {
                             return <CommentAdded
                                 key={userData.id}
                                 name={userData.name}

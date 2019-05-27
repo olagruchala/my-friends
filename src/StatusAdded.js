@@ -3,6 +3,7 @@ import CommentPanel from "./CommentPanel";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser, faUserSecret} from "@fortawesome/free-solid-svg-icons";
 import UserDataService from "./DataService";
+import Moment from "react-moment";
 
 class StatusAdded extends React.Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class StatusAdded extends React.Component {
 
     render() {
 
-        const {txtValue, date, time, name, id, color} = this.props;
+        const {txtValue, date, name, id, color} = this.props;
         let login;
 
         if (name !== "unknown") {
@@ -42,7 +43,9 @@ class StatusAdded extends React.Component {
                     <FontAwesomeIcon className="faUserIcon" style = {{color : color}} icon={login} >
                     </FontAwesomeIcon>
                     <p className="author_name">{name}</p>
-                    <small className="status_data">{date}, {time}</small>
+                    <small className="status_data">
+                        <Moment fromNow>{date}</Moment>
+                    </small>
                 </div>
                 <div className="status_content">{txtValue}</div>
                 <CommentPanel id={id} name={this.state.user.name} email={this.state.user.email}/>
