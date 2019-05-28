@@ -10,8 +10,7 @@ class StatusCreate extends React.Component {
             statusArr: JSON.parse(localStorage.getItem(STORAGE_NAME)) || [{
                 id: 0,
                 txtValue: "Hi, maybe some movie today's evening?",
-                date: new Date().toLocaleTimeString(),
-                time: new Date().toLocaleTimeString(),
+                date: new Date(),
                 name: "Ola",
                 email: "",
                 color: this.chooseColor()
@@ -33,13 +32,13 @@ class StatusCreate extends React.Component {
     };
 
     chooseColor = () => {
-        let colorArr = ["#E84291", "#F7AC13", "#2192A6"];
+        let colorArr = ["#E84291", "#F7AC13", "#2192A6", "#191E44", "#123E92"];
         return colorArr[Math.floor(Math.random() * colorArr.length)];
     };
 
     sendStatus = () => {
-        const localeDate = new Date().toLocaleDateString();
-        const localeTime = new Date().toLocaleTimeString();
+        // const localeDate = new Date().toLocaleDateString();
+        // const localeTime = new Date().toLocaleTimeString();
 
         let storageCallback = () => {
             localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state.statusArr))
@@ -48,8 +47,8 @@ class StatusCreate extends React.Component {
         let statusData = {
             id: this.state.statusArr.length + 1,
             txtValue: this.state.textareaValue,
-            date: localeDate,
-            time: localeTime,
+            date: new Date(),
+            // time: localeTime,
             name: this.props.name,
             email: this.props.email,
             color: this.chooseColor()
@@ -96,7 +95,7 @@ class StatusCreate extends React.Component {
                                                 id={statusData.id}
                                                 txtValue={statusData.txtValue}
                                                 date={statusData.date}
-                                                time={statusData.time}
+                                                // time={statusData.time}
                                                 name={statusData.name}
                                                 email={statusData.email}
                                                 color={statusData.color}

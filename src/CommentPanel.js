@@ -5,6 +5,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCommentDots} from "@fortawesome/free-regular-svg-icons";
 import {Col, Container, Row} from "react-bootstrap";
 import UserDataService from "./DataService";
+import {faAngleDoubleDown, faAngleDoubleUp} from "@fortawesome/free-solid-svg-icons";
 
 const STORAGE_NAME_PREFIX = `comment_panel-`;
 
@@ -86,6 +87,13 @@ class CommentPanel extends React.Component {
 
     render() {
 
+        let faAngleIcon = null;
+        if (this.state.displayComments) {
+            faAngleIcon = faAngleDoubleUp
+        } else {
+            faAngleIcon = faAngleDoubleDown
+        }
+
         const {id} = this.props;
         let comment = null;
 
@@ -131,6 +139,7 @@ class CommentPanel extends React.Component {
                         >
                             <FontAwesomeIcon icon={faCommentDots}/>
                             <span>{this.state.commentsCounter}</span>
+                            <FontAwesomeIcon icon={faAngleIcon}/>
                         </button>
                     </Col>
                 </Row>

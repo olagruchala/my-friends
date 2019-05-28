@@ -129,6 +129,11 @@ div.author {
     color: var(--blue-color);
 }
 
+.dots {
+    color: var(--blue-color);
+    float: right;
+}
+
 .status_content {
     padding-top: 3%;
     word-break: break-word;
