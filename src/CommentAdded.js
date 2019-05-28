@@ -1,4 +1,6 @@
 import React from "react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEllipsisH} from "@fortawesome/free-solid-svg-icons/faEllipsisH";
 
 class CommentAdded extends React.Component {
 
@@ -8,7 +10,7 @@ class CommentAdded extends React.Component {
 
         return (
             <div className="comment_added">
-                <p className="">{name}: <span> {textValue} </span></p>
+                <p className="">{name}: <span> {textValue} </span><FontAwesomeIcon className="dots" icon={faEllipsisH}/></p>
             </div>
         )
     }

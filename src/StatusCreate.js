@@ -32,7 +32,7 @@ class StatusCreate extends React.Component {
     };
 
     chooseColor = () => {
-        let colorArr = ["#E84291", "#F7AC13", "#2192A6"];
+        let colorArr = ["#E84291", "#F7AC13", "#2192A6", "#191E44", "#123E92"];
         return colorArr[Math.floor(Math.random() * colorArr.length)];
     };
 
@@ -50,8 +50,6 @@ class StatusCreate extends React.Component {
             email: this.props.email,
             color: this.chooseColor()
         };
-
-        console.log(statusData.date);
 
         if (statusData.txtValue.trim().length > 0) {
             this.setState(prevState => ({

@@ -4,6 +4,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser, faUserSecret} from "@fortawesome/free-solid-svg-icons";
 import UserDataService from "./DataService";
 import Moment from "react-moment";
+import {faEllipsisH} from "@fortawesome/free-solid-svg-icons/faEllipsisH";
 
 class StatusAdded extends React.Component {
     constructor(props) {
@@ -40,12 +41,12 @@ class StatusAdded extends React.Component {
         return (
             <div className="status_added">
                 <div className="author">
-                    <FontAwesomeIcon className="faUserIcon" style = {{color : color}} icon={login} >
-                    </FontAwesomeIcon>
+                    <FontAwesomeIcon className="faUserIcon" style = {{color : color}} icon={login} />
                     <p className="author_name">{name}</p>
                     <small className="status_data">
                         <Moment fromNow>{date}</Moment>
                     </small>
+                    <FontAwesomeIcon className="dots" icon={faEllipsisH}/>
                 </div>
                 <div className="status_content">{txtValue}</div>
                 <CommentPanel id={id} name={this.state.user.name} email={this.state.user.email}/>
