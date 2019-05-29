@@ -18,7 +18,8 @@ class CommentPanel extends React.Component {
             commentsArr: [],
             commentsCounter: 0,
             displayComments: false,
-            textareaValue: ""
+            textareaValue: "",
+            loggedInEmail: "unknown"
         };
 
         this.displayCommentsHandler = this.displayCommentsHandler.bind(this);
@@ -35,8 +36,14 @@ class CommentPanel extends React.Component {
     onUserNameDefined = (user) => {
         if (user.name === "unknown") {
             this.setState({
-                displayComments: false
-            }, () => console.log(this.state))
+                displayComments: false,
+                loggedInEmail: "unknown"
+            })
+        } else {
+            this.setState({
+                displayComments: true,
+                loggedInEmail: user.email
+            })
         }
     };
 
@@ -108,8 +115,7 @@ class CommentPanel extends React.Component {
                         onKeyDown={this.addNewComment}
                         value={this.state.textareaValue}
                         onChange={this.textareaHandle}
-                    >
-                    </textarea>
+                    />
                     <div className="comment_list">
                         { this.state.commentsArr.map(userData => {
                             return <CommentAdded
@@ -117,6 +123,7 @@ class CommentPanel extends React.Component {
                                 name={userData.name}
                                 email={userData.email}
                                 textValue={userData.textValue}
+                                loggedInEmail={this.state.loggedInEmail}
                             />
                         })}
                     </div>
@@ -124,6 +131,8 @@ class CommentPanel extends React.Component {
             )
 
         }
+
+
 
         return (
             <Container className="comment-container">

@@ -6,11 +6,18 @@ class CommentAdded extends React.Component {
 
     render() {
 
-        const {name, textValue} = this.props;
+        const {name, email, textValue, loggedInEmail} = this.props;
+        let dots;
+
+        if (loggedInEmail === email && loggedInEmail !== "unknown") {
+            dots = (
+                <FontAwesomeIcon className="dots" icon={faEllipsisH}/>
+            )
+        }
 
         return (
             <div className="comment_added">
-                <p className="">{name}: <span> {textValue} </span><FontAwesomeIcon className="dots" icon={faEllipsisH}/></p>
+                <p className="">{name}: <span> {textValue} </span> {dots} </p>
             </div>
         )
     }

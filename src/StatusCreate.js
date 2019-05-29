@@ -16,7 +16,7 @@ class StatusCreate extends React.Component {
                 color: this.chooseColor()
             }],
             letters: 0,
-            textareaValue: ""
+            textareaValue: "" // for controlled textarea
         };
 
         this.sendStatus = this.sendStatus.bind(this);
@@ -43,7 +43,7 @@ class StatusCreate extends React.Component {
         };
 
         let statusData = {
-            id: this.state.statusArr.length + 1,
+            id: this.state.statusArr.length,
             txtValue: this.state.textareaValue,
             date: new Date(),
             name: this.props.name,
