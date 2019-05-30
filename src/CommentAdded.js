@@ -1,6 +1,7 @@
 import React from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEllipsisH} from "@fortawesome/free-solid-svg-icons/faEllipsisH";
+import {UserDataService} from "./DataService";
 
 class CommentAdded extends React.Component {
     constructor(props) {
@@ -8,7 +9,11 @@ class CommentAdded extends React.Component {
         this.state = {
             editing: false,
             textareaValue: this.props.textValue,
-            commentsArr: this.props.commentsArr
+            commentsArr: this.props.commentsArr,
+            user: {
+                name: this.props.name,
+                email: this.props.email
+            }
         };
 
         this.renderNormal = this.renderNormal.bind(this);
@@ -17,7 +22,16 @@ class CommentAdded extends React.Component {
         this.applyComment = this.applyComment.bind(this);
         this.textareaHandle = this.textareaHandle.bind(this);
 
+        UserDataService.addObserver(this.onUserNameDefined)
+
     }
+
+    // Set newData about loggedIn user in CommentAdded from DataService
+    onUserNameDefined = (user) => {
+        this.setState({
+            user: user
+        });
+    };
 
     textareaHandle(e) {
         this.setState({
@@ -71,11 +85,11 @@ class CommentAdded extends React.Component {
 
     render() {
 
-        const {name, email, loggedInEmail} = this.props;
+        const {name, email} = this.props;
 
         // display editing dots on comments from user loggedIn
         let dots;
-        if (loggedInEmail === email && loggedInEmail !== "unknown") {
+        if (this.state.user.email === email && this.state.user.email !== "unknown") {
             dots = (
                 <FontAwesomeIcon className="dots" icon={faEllipsisH} onClick={this.editComment}/>
             )

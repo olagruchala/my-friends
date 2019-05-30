@@ -19,7 +19,6 @@ class CommentPanel extends React.Component {
             commentsCounter: 0,
             displayComments: false,
             textareaValue: "",
-            loggedInEmail: "unknown"
         };
 
         this.displayComments = this.displayComments.bind(this);
@@ -44,13 +43,11 @@ class CommentPanel extends React.Component {
     onUserNameDefined = (user) => {
         if (user.name === "unknown") {
             this.setState({
-                displayComments: false,
-                loggedInEmail: "unknown"
+                displayComments: false
             })
         } else {
             this.setState({
-                displayComments: true,
-                loggedInEmail: user.email
+                displayComments: true
             })
         }
     };
@@ -135,7 +132,6 @@ class CommentPanel extends React.Component {
                                 name={userData.name}
                                 email={userData.email}
                                 textValue={userData.textValue}
-                                loggedInEmail={this.state.loggedInEmail}
                                 commentsArr={this.state.commentsArr}
                                 commentObserver={CommentDataObserver}
                             />
