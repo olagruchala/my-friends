@@ -2,7 +2,7 @@ import React from "react";
 import CommentPanel from "./CommentPanel";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser, faUserSecret} from "@fortawesome/free-solid-svg-icons";
-import UserDataService from "./DataService";
+import {UserDataService} from "./DataService";
 import Moment from "react-moment";
 import {faEllipsisH} from "@fortawesome/free-solid-svg-icons/faEllipsisH";
 

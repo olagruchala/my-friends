@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Header from "./Header";
 import StatusCreate from "./StatusCreate";
-import UserDataService from "./DataService";
+import {UserDataService} from "./DataService";
 
 class App extends React.Component {
     constructor(props) {

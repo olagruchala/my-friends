@@ -4,7 +4,7 @@ import CommentAdded from "./CommentAdded"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCommentDots} from "@fortawesome/free-regular-svg-icons";
 import {Col, Container, Row} from "react-bootstrap";
-import UserDataService from "./DataService";
+import {UserDataService, CommentDataObserver} from "./DataService";
 import {faAngleDoubleDown, faAngleDoubleUp} from "@fortawesome/free-solid-svg-icons";
 
 const STORAGE_NAME_PREFIX = `comment_panel-`;
@@ -22,15 +22,23 @@ class CommentPanel extends React.Component {
             loggedInEmail: "unknown"
         };
 
-        this.displayCommentsHandler = this.displayCommentsHandler.bind(this);
+        this.displayComments = this.displayComments.bind(this);
         this.addNewComment = this.addNewComment.bind(this);
         this.getStorageName = this.getStorageName.bind(this);
         this.textareaHandle = this.textareaHandle.bind(this);
         this.storageCallback = this.storageCallback.bind(this);
 
-        UserDataService.addObserver(this.onUserNameDefined)
+        UserDataService.addObserver(this.onUserNameDefined);
+        CommentDataObserver.addObserver(this.onCommentEdition)
 
     }
+
+    // callback when some comment from commentsArr is edited
+    onCommentEdition = (commentsArr) => {
+        this.setState({
+            commentsArr: commentsArr
+        }, this.storageCallback)
+    };
 
     // hide comments if the user logs out
     onUserNameDefined = (user) => {
@@ -53,7 +61,7 @@ class CommentPanel extends React.Component {
 
     storageCallback = () => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
 
-    displayCommentsHandler() {
+    displayComments() {
         if (this.state.displayComments) {
             this.setState(prevState => ({
                 displayComments: !prevState.displayComments
@@ -79,6 +87,7 @@ class CommentPanel extends React.Component {
             textValue: this.state.textareaValue
         };
 
+
         if (userData.textValue.trim().length > 0) {
             if (e.keyCode === 13 && e.shiftKey === false) {
                 e.preventDefault(); // delete enter in textarea after send a new comment
@@ -94,6 +103,9 @@ class CommentPanel extends React.Component {
 
     render() {
 
+        const {id} = this.props;
+
+        // arrows up and down to display or not comments list
         let faAngleIcon = null;
         if (this.state.displayComments) {
             faAngleIcon = faAngleDoubleUp
@@ -101,9 +113,8 @@ class CommentPanel extends React.Component {
             faAngleIcon = faAngleDoubleDown
         }
 
-        const {id} = this.props;
+        // display or not comments list
         let comment = null;
-
         if (this.state.displayComments) {
             comment = (
                 <div>
@@ -120,10 +131,13 @@ class CommentPanel extends React.Component {
                         { this.state.commentsArr.map(userData => {
                             return <CommentAdded
                                 key={userData.id}
+                                id={userData.id}
                                 name={userData.name}
                                 email={userData.email}
                                 textValue={userData.textValue}
                                 loggedInEmail={this.state.loggedInEmail}
+                                commentsArr={this.state.commentsArr}
+                                commentObserver={CommentDataObserver}
                             />
                         })}
                     </div>
@@ -144,7 +158,7 @@ class CommentPanel extends React.Component {
                         <button className="comment_button btn-right"
                                 name="comment"
                                 value={this.state.commentsCounter}
-                                onClick={this.displayCommentsHandler}
+                                onClick={this.displayComments}
                         >
                             <FontAwesomeIcon icon={faCommentDots}/>
                             <span>{this.state.commentsCounter}</span>

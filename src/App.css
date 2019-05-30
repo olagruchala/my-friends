@@ -214,6 +214,15 @@ textarea.comment_create {
     resize: none;
 }
 
+textarea.comment_edit {
+    font-size: small;
+    border: 1px dotted var(--blue-color);
+    border-radius: 3px;
+    width: 76%;
+    text-align: left;
+    resize: none;
+}
+
 div.comment_list {
     /*border: 1px dotted var(--blue-color);*/
     border-radius: 3px;

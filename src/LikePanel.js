@@ -1,7 +1,7 @@
 import React from 'react';
 import {faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import UserDataService from "./DataService";
+import {UserDataService} from "./DataService";
 import {Button, OverlayTrigger, Tooltip} from "react-bootstrap";
 
 const STORAGE_NAME_PREFIX = `like_panel-`;

@@ -2,6 +2,7 @@ class DataService {
     observers = [];
 
     setNewData(newData) {
+        console.log("newData: ");
         console.log(newData);
         this.observers.forEach(observer =>
             observer(newData)
@@ -13,6 +14,6 @@ class DataService {
     }
 }
 
-let UserDataService = new DataService();
+export let UserDataService = new DataService();
 
-export default UserDataService;
+export let CommentDataObserver = new DataService();

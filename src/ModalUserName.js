@@ -25,7 +25,7 @@ class ModalUserName extends React.Component {
 
     componentDidMount() {
         if (this.state.user.name !== "unknown") {
-            this.props.dataService.setNewData(this.state.user);//set user
+            this.props.dataService.setNewData(this.state.user); //set user
         }
     }
 
