@@ -40,13 +40,13 @@ class CommentAdded extends React.Component {
     };
 
     // editing statuses
-    editComment () {
+    editComment() {
         this.setState({
             editing: true
         })
     };
 
-    applyComment (e) {
+    applyComment(e) {
         let commentsArr = this.state.commentsArr;
         let commentIndex = commentsArr.map(comment => (comment.id)).indexOf(this.props.id);
         let newText = this.state.textareaValue;
@@ -62,13 +62,13 @@ class CommentAdded extends React.Component {
         }
     }
 
-    renderNormal () {
+    renderNormal() {
         return (
             <span> {this.state.textareaValue} </span>
         )
     }
 
-    renderTxtArea () {
+    renderTxtArea() {
         return (
             <span>
                 <textarea
@@ -105,7 +105,7 @@ class CommentAdded extends React.Component {
 
         return (
             <div className="comment_added">
-                <p className="">{name}: {edit}  {dots} </p>
+                <p className="">{name}: {edit} {dots} </p>
             </div>
         )
     }

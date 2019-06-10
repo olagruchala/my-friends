@@ -43,13 +43,13 @@ class StatusAdded extends React.Component {
     };
 
     // editing statuses
-    editStatus () {
+    editStatus() {
         this.setState({
             editing: true
         })
     };
 
-    applyStatus (e) {
+    applyStatus(e) {
         let statusArr = this.state.statusArr;
         let statusIndex = statusArr.map(status => (status.id)).indexOf(this.props.id);
         let newText = this.state.textareaValue;
@@ -59,15 +59,15 @@ class StatusAdded extends React.Component {
             statusArr[statusIndex] = newStatusObj;
 
             this.setState({
-                    editing: false,
-                    statusArr: statusArr
+                editing: false,
+                statusArr: statusArr
             }, () => {
-                    localStorage.setItem("statuses", JSON.stringify(this.state.statusArr));
+                localStorage.setItem("statuses", JSON.stringify(this.state.statusArr));
             })
         }
     }
 
-    renderTxtArea () {
+    renderTxtArea() {
         return (
             <div>
                 <textarea
@@ -80,7 +80,7 @@ class StatusAdded extends React.Component {
         )
     }
 
-    renderNormal () {
+    renderNormal() {
         return (
             <div>
                 <div className="status_content">{this.state.textareaValue}</div>
@@ -106,7 +106,7 @@ class StatusAdded extends React.Component {
         if (email === this.state.user.email && this.state.user.email !== "unknown") {
             dots = (
                 <FontAwesomeIcon className="dots" icon={faEllipsisH} onClick={this.editStatus}/>
-                )
+            )
         }
 
         // render status or textarea field to editing this status
@@ -121,7 +121,7 @@ class StatusAdded extends React.Component {
         return (
             <div className="status_added">
                 <div className="author">
-                    <FontAwesomeIcon className="faUserIcon" style = {{color : color}} icon={login} />
+                    <FontAwesomeIcon className="faUserIcon" style={{color: color}} icon={login}/>
                     <p className="author_name">{name}</p>
                     <small className="status_data">
                         <Moment fromNow>{date}</Moment>
