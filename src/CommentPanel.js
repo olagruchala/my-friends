@@ -32,6 +32,12 @@ class CommentPanel extends React.Component {
 
     }
 
+    getStorageName() {
+        return STORAGE_NAME_PREFIX + this.props.id;
+    }
+
+    storageCallback = () => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
+
     // callback when some comment from commentsArr is edited
     onCommentEdition = (commentsArr) => {
         this.setState({
@@ -45,18 +51,8 @@ class CommentPanel extends React.Component {
             this.setState({
                 displayComments: false
             })
-        } else {
-            this.setState({
-                displayComments: true
-            })
         }
     };
-
-    getStorageName() {
-        return STORAGE_NAME_PREFIX + this.props.id;
-    }
-
-    storageCallback = () => localStorage.setItem(this.getStorageName(), JSON.stringify(this.state));
 
     displayComments() {
         if (this.state.displayComments) {
