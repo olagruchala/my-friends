@@ -26,6 +26,8 @@ class CommentAdded extends React.Component {
 
     }
 
+    // storageCallback = () => localStorage.setItem(this.props.getStorageName(), JSON.stringify(this.state))
+
     // Set newData about loggedIn user in CommentAdded from DataService
     onUserNameDefined = (user) => {
         this.setState({
@@ -39,7 +41,7 @@ class CommentAdded extends React.Component {
         });
     };
 
-    // editing statuses
+    // editing comment -> show textarea
     editComment() {
         this.setState({
             editing: true
@@ -58,7 +60,10 @@ class CommentAdded extends React.Component {
             this.setState({
                 editing: false,
                 commentsArr: commentsArr
-            }, () => this.props.commentObserver.setNewData(this.state.commentsArr)) // set new commentsArr for CommentPanel
+            }, () => {
+                // this.props.commentObserver.setNewData(this.state.commentsArr);
+                localStorage.setItem(this.props.storageName, JSON.stringify(this.state));
+            }) // set new commentsArr for CommentPanel-id
         }
     }
 

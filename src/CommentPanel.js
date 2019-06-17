@@ -107,9 +107,9 @@ class CommentPanel extends React.Component {
         }
 
         // display or not comments list
-        let comment = null;
+        let commentList = null;
         if (this.state.displayComments) {
-            comment = (
+            commentList = (
                 <div>
                     <textarea
                         rows="1"
@@ -130,6 +130,7 @@ class CommentPanel extends React.Component {
                                 textValue={userData.textValue}
                                 commentsArr={this.state.commentsArr}
                                 commentObserver={CommentDataObserver}
+                                storageName={this.getStorageName()}
                             />
                         })}
                     </div>
@@ -159,7 +160,7 @@ class CommentPanel extends React.Component {
                 </Row>
                 <Row>
                     <Col>
-                        {comment}
+                        {commentList}
                     </Col>
                 </Row>
             </Container>

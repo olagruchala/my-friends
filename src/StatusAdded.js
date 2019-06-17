@@ -110,11 +110,11 @@ class StatusAdded extends React.Component {
         }
 
         // render status or textarea field to editing this status
-        let edit;
+        let statusOrTextarea;
         if (this.state.editing) {
-            edit = this.renderTxtArea()
+            statusOrTextarea = this.renderTxtArea()
         } else {
-            edit = this.renderNormal()
+            statusOrTextarea = this.renderNormal()
         }
 
 
@@ -128,7 +128,7 @@ class StatusAdded extends React.Component {
                     </small>
                     {dots}
                 </div>
-                {edit}
+                {statusOrTextarea}
                 <CommentPanel id={id} name={this.state.user.name} email={this.state.user.email}/>
             </div>
         )
