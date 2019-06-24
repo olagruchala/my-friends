@@ -16,4 +16,5 @@ class DataService {
 
 export let UserDataService = new DataService();
 
-export let CommentDataObserver = new DataService();
+export default DataService;
+

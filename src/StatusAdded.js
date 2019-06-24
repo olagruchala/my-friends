@@ -21,7 +21,7 @@ class StatusAdded extends React.Component {
 
         this.editStatus = this.editStatus.bind(this);
         this.applyStatus = this.applyStatus.bind(this);
-        this.renderTxtArea = this.renderTxtArea.bind(this);
+        this.renderTextarea = this.renderTextarea.bind(this);
         this.renderNormal = this.renderNormal.bind(this);
         this.textareaHandle = this.textareaHandle.bind(this);
 
@@ -42,19 +42,19 @@ class StatusAdded extends React.Component {
         });
     };
 
-    // editing statuses
+    // editing statuses -> show textarea
     editStatus() {
         this.setState({
             editing: true
         })
     };
 
-    applyStatus(e) {
-        let statusArr = this.state.statusArr;
-        let statusIndex = statusArr.map(status => (status.id)).indexOf(this.props.id);
-        let newText = this.state.textareaValue;
-
+    applyStatus = (e) => {
         if (e.keyCode === 13 && e.shiftKey === false) {
+            let statusArr = this.state.statusArr;
+            let statusIndex = statusArr.map(status => (status.id)).indexOf(this.props.id);
+            let newText = this.state.textareaValue;
+
             let newStatusObj = Object.assign(statusArr[statusIndex], {txtValue: newText});
             statusArr[statusIndex] = newStatusObj;
 
@@ -65,9 +65,9 @@ class StatusAdded extends React.Component {
                 localStorage.setItem("statuses", JSON.stringify(this.state.statusArr));
             })
         }
-    }
+    };
 
-    renderTxtArea() {
+    renderTextarea() {
         return (
             <div>
                 <textarea
@@ -112,7 +112,7 @@ class StatusAdded extends React.Component {
         // render status or textarea field to editing this status
         let statusOrTextarea;
         if (this.state.editing) {
-            statusOrTextarea = this.renderTxtArea()
+            statusOrTextarea = this.renderTextarea()
         } else {
             statusOrTextarea = this.renderNormal()
         }
@@ -129,7 +129,11 @@ class StatusAdded extends React.Component {
                     {dots}
                 </div>
                 {statusOrTextarea}
-                <CommentPanel id={id} name={this.state.user.name} email={this.state.user.email}/>
+                <CommentPanel
+                    id={id}
+                    name={this.state.user.name}
+                    email={this.state.user.email}
+                />
             </div>
         )
     }
