@@ -9,9 +9,9 @@ class CommentAdded extends React.Component {
         this.state = {
             editing: false,
             commentValue: this.props.textValue,
-            user: {
-                name: this.props.name,
-                email: this.props.email
+            user: JSON.parse(localStorage.getItem("user")) || {
+                name: "unknown",
+                email: "unknown"
             }
         };
 
@@ -24,16 +24,11 @@ class CommentAdded extends React.Component {
         UserDataService.addObserver(this.onUserNameDefined);
     }
 
-
     // Set newData about loggedIn user in CommentAdded from DataService
     onUserNameDefined = (user) => {
-        // console.log("this.state.user onUserNameDefined in CommentAdded :");
-        // console.log(this.state.user);
         this.setState({
             user: user
-        }, () => {
-            // console.log(this.state.user) // todo: dlaczego nie uruchamia się ten callback kiedy zmieniam usera?
-        });
+        } );
     };
 
     textareaHandle(e) {
@@ -90,7 +85,7 @@ class CommentAdded extends React.Component {
 
         // display editing dots on comments from user loggedIn
         let dots;
-        if (this.state.user.email !== "unknown" && this.state.user.email === email) {
+        if (email !== "unknown" && this.state.user.email === email) {
             dots = (
                 <FontAwesomeIcon className="dots" icon={faEllipsisH} onClick={this.editComment}/>
             )
