@@ -2,6 +2,7 @@
 * [General info](#general-info)
 * [Technologies](#technologies)
 * [Setup](#setup)
+* [Features](#features)
 
 ## General info
 This project is my idea for training in ReactJS. It is built similarly to Facebook. 
