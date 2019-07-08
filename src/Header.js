@@ -11,7 +11,7 @@ class Header extends React.Component {
                 <div className="logo">
                     <img src={logo} alt="logo" height="120px">
                     </img>
-                    <h1>friends</h1>
+                    <h1>Friends</h1>
                 </div>
                 <div className="hello_user">
                     <span>Hello {this.props.name}!</span>

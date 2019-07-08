@@ -18,6 +18,7 @@ class StatusAdded extends React.Component {
             },
             statusArr: JSON.parse(localStorage.getItem("statuses"))
         };
+        this.textarea = React.createRef();
 
         this.editStatus = this.editStatus.bind(this);
         this.applyStatus = this.applyStatus.bind(this);
@@ -46,6 +47,8 @@ class StatusAdded extends React.Component {
     editStatus() {
         this.setState({
             editing: true
+        }, () => {
+            this.textarea.current.focus();
         })
     };
 
@@ -55,8 +58,7 @@ class StatusAdded extends React.Component {
             let statusIndex = statusArr.map(status => (status.id)).indexOf(this.props.id);
             let newText = this.state.textareaValue;
 
-            let newStatusObj = Object.assign(statusArr[statusIndex], {txtValue: newText});
-            statusArr[statusIndex] = newStatusObj;
+            statusArr[statusIndex] = Object.assign(statusArr[statusIndex], {txtValue: newText});
 
             this.setState({
                 editing: false,
@@ -75,6 +77,7 @@ class StatusAdded extends React.Component {
                     onKeyDown={this.applyStatus}
                     value={this.state.textareaValue}
                     onChange={this.textareaHandle}
+                    ref={this.textarea}
                 />
             </div>
         )
