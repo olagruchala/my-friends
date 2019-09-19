@@ -16,7 +16,7 @@ class Header extends React.Component {
                 <div className="hello_user">
                     <span>Hello {this.props.name}!</span>
                     <br/>
-                    <ModalUserName dataService={this.props.dataService}/>
+                    <ModalUserName />
                 </div>
             </header>
         )

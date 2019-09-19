@@ -30,7 +30,7 @@ class App extends React.Component {
         return (
             <div>
                 <div>
-                    <Header dataService={UserDataService} name={this.state.user.name}/>
+                    <Header name={this.state.user.name}/>
                     <div className="body-container">
                         <StatusCreate maxLetters={300} name={this.state.user.name} email={this.state.user.email}/>
                     </div>

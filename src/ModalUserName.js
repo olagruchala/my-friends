@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Button, Modal, Form} from "react-bootstrap";
+import {UserDataService} from "./DataService";
+
 
 class ModalUserName extends React.Component {
     constructor(props) {
@@ -25,7 +27,7 @@ class ModalUserName extends React.Component {
 
     componentDidMount() {
         if (this.state.user.name !== "unknown") {
-            this.props.dataService.setNewData(this.state.user); //set user
+            UserDataService.setNewData(this.state.user); //set user
         }
     }
 
@@ -57,7 +59,7 @@ class ModalUserName extends React.Component {
                     email: emailText.value
                 }
             }, () => {
-                this.props.dataService.setNewData(this.state.user); // set user
+                UserDataService.setNewData(this.state.user); // set user
                 localStorage.setItem("user", JSON.stringify(this.state.user));
                 localStorage.setItem("isLoggedIn", JSON.stringify(true));
             });
@@ -77,7 +79,7 @@ class ModalUserName extends React.Component {
                     email: "unknown"
                 }
             }, () => {
-                this.props.dataService.setNewData(this.state.user);
+                UserDataService.setNewData(this.state.user);
                 localStorage.setItem("user", JSON.stringify(this.state.user));
                 localStorage.setItem("isLoggedIn", JSON.stringify(false));
             })

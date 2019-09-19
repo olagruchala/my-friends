@@ -29,6 +29,30 @@ describe('App component', () => {
         .toBe('div');
   });
 
+  describe('the rendered div', () => {
+    const div = () => appWrapper.first();
+
+    it('contains everything else that gets rendered', () => {
+      expect(div().children()).toEqual(appWrapper.children());
+    });
+  });
+
+  describe('the onUserNameDefined method', () => {
+    const newUser = {
+      name: "Kacper",
+      email: "ghost@gmail.com"
+    };
+
+    it('sets this.state.user to new user', () => {
+      appInstance.onUserNameDefined(newUser);
+      const userState = appInstance.state.user;
+      expect(userState).toEqual(newUser);
+    });
+  });
+
+
+  // Header Component in App
+
   it('renders <Header />', () => {
     expect(appWrapper.find(Header).length)
         .toBe(1);
@@ -40,8 +64,9 @@ describe('App component', () => {
     it('receives this.state.user.name as a "name" prop', () => {
       expect(header().prop('name')).toEqual(appWrapper.state('user').name);
     });
-
   });
+
+  // StatusCreate Component in App
 
   it('renders <StatusCreate />', () => {
     expect(appWrapper.find(StatusCreate).length)
