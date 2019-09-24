@@ -4,6 +4,7 @@ import App from './App';
 import Header from "./Header";
 import StatusCreate from "./StatusCreate";
 
+
 describe('App component', () => {
   let appWrapper;
   let appInstance;
@@ -50,7 +51,6 @@ describe('App component', () => {
     });
   });
 
-
   // Header Component in App
 
   it('renders <Header />', () => {
@@ -91,6 +91,9 @@ describe('App component', () => {
   });
 
 });
+
+
+describe('')
 
 
 

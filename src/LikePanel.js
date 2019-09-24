@@ -17,7 +17,6 @@ class LikePanel extends React.Component {
                 email: "unknown"
             },
             likes: JSON.parse(localStorage.getItem(this.getStorageName())) || {
-                likesCounter: 0,
                 likesArr: [],
                 currentUserLike: false
             }
@@ -54,7 +53,7 @@ class LikePanel extends React.Component {
             if (!likesArr.includes(userEmail)) {
                 likesArr.push(userEmail);
                 this.setState(prevState => ({
-                    likes: Object.assign(prevState.likes, {likesArr: likesArr, likesCounter: likesArr.length})
+                    likes: Object.assign(prevState.likes, {likesArr: likesArr})
                 }), storageCallback)
             } else {
                 let checkEmailIndex = (element) => {
@@ -63,7 +62,7 @@ class LikePanel extends React.Component {
                 let emailIndex = likesArr.findIndex(checkEmailIndex);
                 likesArr.splice(emailIndex, 1);
                 this.setState(prevState => ({
-                    likes: Object.assign(prevState.likes, {likesArr: likesArr, likesCounter: likesArr.length})
+                    likes: Object.assign(prevState.likes, {likesArr: likesArr})
                 }), storageCallback)
             }
         }
@@ -83,7 +82,7 @@ class LikePanel extends React.Component {
                         className="comment_button btn-left"
                     >
                         <FontAwesomeIcon icon={faThumbsUp}/>
-                        <span>{this.state.likes.likesCounter}</span>
+                        <span>{this.state.likes.likesArr.length}</span>
                     </Button>
                     </span>
                 </OverlayTrigger>
@@ -93,11 +92,11 @@ class LikePanel extends React.Component {
                 <button
                     className="comment_button btn-left"
                     name="like"
-                    value={this.state.likes.likesCounter}
+                    value={this.state.likes.likesArr.length}
                     onClick={this.likeHandler}
                 >
                     <FontAwesomeIcon icon={faThumbsUp}/>
-                    <span>{this.state.likes.likesCounter}</span>
+                    <span>{this.state.likes.likesArr.length}</span>
                 </button>
             )
         }
