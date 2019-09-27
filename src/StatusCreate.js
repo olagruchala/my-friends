@@ -36,7 +36,7 @@ class StatusCreate extends React.Component {
         return colorArr[Math.floor(Math.random() * colorArr.length)];
     };
 
-    sendStatus = () => {
+    sendStatus() {
 
         let storageCallback = () => {
             localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state.statusArr))
@@ -57,10 +57,6 @@ class StatusCreate extends React.Component {
                 letters: 0,
                 textareaValue: ""
             }), storageCallback);
-        } else {
-            this.setState({
-                textareaValue: ""
-            })
         }
     };
 
