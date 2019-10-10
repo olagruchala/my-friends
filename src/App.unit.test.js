@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
 import Header from "./Header";
 import StatusCreate from "./StatusCreate";
@@ -8,10 +7,9 @@ import StatusCreate from "./StatusCreate";
 describe('App component', () => {
   let appWrapper;
   let appInstance;
-  const app = () => shallow(<App />);
 
   beforeEach(() => {
-    appWrapper = app();
+    appWrapper = shallow(<App />);
     appInstance = appWrapper.instance();
   });
 
@@ -21,20 +19,19 @@ describe('App component', () => {
   });
 
   it('renders without crashing', () => {
-    expect(app().exists())
+    expect(appWrapper.exists())
         .toBe(true);
   });
 
   it('renders a div', () => {
-    expect(app().first().type())
+    expect(appWrapper.first().type())
         .toBe('div');
   });
 
   describe('the rendered div', () => {
-    const div = () => appWrapper.first();
 
     it('contains everything else that gets rendered', () => {
-      expect(div().children()).toEqual(appWrapper.children());
+      expect(appWrapper.first().children()).toEqual(appWrapper.children());
     });
   });
 
@@ -51,7 +48,7 @@ describe('App component', () => {
     });
   });
 
-  // Header Component in App
+  // Header Component in App Component
 
   it('renders <Header />', () => {
     expect(appWrapper.find(Header).length)
@@ -66,7 +63,7 @@ describe('App component', () => {
     });
   });
 
-  // StatusCreate Component in App
+  // StatusCreate Component in App Component
 
   it('renders <StatusCreate />', () => {
     expect(appWrapper.find(StatusCreate).length)
@@ -91,9 +88,3 @@ describe('App component', () => {
   });
 
 });
-
-
-describe('')
-
-
-
