@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/my-friends/static/css/main.bcb070a0.chunk.css",
-    "main.js": "/my-friends/static/js/main.0bbfcf83.chunk.js",
-    "main.js.map": "/my-friends/static/js/main.0bbfcf83.chunk.js.map",
+    "main.js": "/my-friends/static/js/main.85fd74af.chunk.js",
+    "main.js.map": "/my-friends/static/js/main.85fd74af.chunk.js.map",
     "runtime~main.js": "/my-friends/static/js/runtime~main.e82ab982.js",
     "runtime~main.js.map": "/my-friends/static/js/runtime~main.e82ab982.js.map",
     "static/js/2.45f3aaf2.chunk.js": "/my-friends/static/js/2.45f3aaf2.chunk.js",
     "static/js/2.45f3aaf2.chunk.js.map": "/my-friends/static/js/2.45f3aaf2.chunk.js.map",
     "index.html": "/my-friends/index.html",
-    "precache-manifest.771f864134aadefffcb1c565526a153a.js": "/my-friends/precache-manifest.771f864134aadefffcb1c565526a153a.js",
+    "precache-manifest.f96fde8c831a013ad619c4608234af38.js": "/my-friends/precache-manifest.f96fde8c831a013ad619c4608234af38.js",
     "service-worker.js": "/my-friends/service-worker.js",
     "static/css/main.bcb070a0.chunk.css.map": "/my-friends/static/css/main.bcb070a0.chunk.css.map",
     "static/media/logo.png": "/my-friends/static/media/logo.8a5da5cb.png"
