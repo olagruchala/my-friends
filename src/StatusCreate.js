@@ -19,7 +19,7 @@ class StatusCreate extends React.Component {
             textareaValue: "" // for controlled textarea
         };
 
-        this.sendStatus = this.sendStatus.bind(this);
+        this.storeStatus = this.storeStatus.bind(this);
         this.textareaHandle = this.textareaHandle.bind(this);
         this.chooseColor = this.chooseColor.bind(this);
     }
@@ -36,7 +36,7 @@ class StatusCreate extends React.Component {
         return colorArr[Math.floor(Math.random() * colorArr.length)];
     };
 
-    sendStatus() {
+    storeStatus() {
 
         let storageCallback = () => {
             localStorage.setItem(STORAGE_NAME, JSON.stringify(this.state.statusArr))
@@ -58,6 +58,8 @@ class StatusCreate extends React.Component {
                 textareaValue: ""
             }), storageCallback);
         }
+
+        console.log(localStorage.getItem('statuses'));
     };
 
     render() {
@@ -77,7 +79,7 @@ class StatusCreate extends React.Component {
                     >
                 </textarea>
                     <small>{this.props.maxLetters - this.state.letters} characters</small>
-                    <button id="send" onClick={this.sendStatus}>Send</button>
+                    <button id="send" onClick={this.storeStatus}>Send</button>
                 </div>
                 <br/>
                 <div id="status_container">
